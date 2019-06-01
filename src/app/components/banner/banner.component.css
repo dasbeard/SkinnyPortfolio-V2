@@ -1,0 +1,90 @@
+.container {
+    margin-right: 1.5em;
+  }
+  
+  .imageContainer {
+    /* grid-area: image; */
+    max-width: 280px;
+    min-width: 280px;
+    max-height: 280px;
+    min-height: 280px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    border: 11px solid rgba(0, 0, 0, 0.65);
+    border-radius: 5px;
+  }
+  
+  .imageContainer img {
+    height: calc(100% + 4px);
+    /* width: 100%; */
+    width: calc(100% + 4px);
+    margin: -2px 0 0 -2px;
+    padding: 0;
+    border-radius: 4px;
+  }
+  
+  .info {
+    display: block;
+    text-shadow: 0 5px 2px #000;
+  }
+  
+  .info h4 {
+    font-weight: 200;
+    font-size: 1em;
+  }
+  
+  .filter {
+    filter: drop-shadow(0 5px 2px rgba(0, 0, 0, 1));
+  }
+  
+  .icon {
+    margin-right: 1.5em;
+    fill: #fff;
+  }
+  
+  .icon svg {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .icon:hover {
+    fill: rgb(57, 108, 247);
+  }
+  
+  @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
+    .imageContainer {
+      /* grid-area: image; */
+      max-width: 150px;
+      min-width: 150px;
+      max-height: 150px;
+      min-height: 150px;
+      margin: 0;
+      padding: 0;
+      display: block;
+      border: 11px solid rgba(0, 0, 0, 0.65);
+      border-radius: 5px;
+    }
+  
+    .info h1 {
+      font-size: 1.25em;
+      margin: 0.5em 0;
+    }
+  
+    .info h4 {
+      font-weight: 200;
+      font-size: 0.8em;
+      margin: 0.5em 0 1em 0;
+    }
+  
+    .icon {
+      margin-right: 1.5em;
+      fill: #fff;
+    }
+  
+    .icon svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  

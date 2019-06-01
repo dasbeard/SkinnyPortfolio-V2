@@ -1,0 +1,43 @@
+.container {
+  /* outline: 1px solid red; */
+  width: 100%;
+}
+
+.link {
+  display: inline-block;
+  /* outline: 1px solid green; */
+  width: 100%;
+  /* margin-bottom: 0.5em; */
+  border-bottom: 1px solid rgba(125, 125, 125, 0.5);
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  /* margin-right: 1.5em; */
+  /* width: 30%; */
+}
+
+.links a:hover {
+  color: rgb(57, 108, 247);
+  text-decoration: none;
+}
+
+.links .title{
+  display: inline-block;
+
+}
+
+.links .separator {
+  margin: 0 2.5%;
+  display: inline-block;
+  /* width: 5%; */
+  /* outline: 1px solid red; */
+}
+
+.links .description {
+  display: inline-block;
+  margin: 0.5em;
+  /* width: 55%; */
+}

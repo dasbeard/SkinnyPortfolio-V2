@@ -1,0 +1,15 @@
+<div
+  class="container mat-elevation-z5"
+  (click)="openDialog()"
+  *ngIf="albumInfo != null"
+>
+  <div class="image" >
+    <img class="mat-elevation-z10" src="{{ albumInfo.image }}" alt="{{ albumInfo.artist }} {{ albumInfo.album }} album cover" />
+  </div>
+
+  <div class="info">
+    <p>{{ albumInfo.artist }}</p>
+    <p>{{ albumInfo.album }}</p>
+  </div>
+</div>
+

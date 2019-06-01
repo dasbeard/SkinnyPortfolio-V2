@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .loginBtn {
+    margin-top: 15%;
+    width: 175px;
+    font-size: 1em;
+  }
+  
+  app-admin-page {
+    /* background-color: rgba(33, 33, 33, 0.75); */
+    padding-bottom: 3em;
+    margin-bottom: 2em;
+  }
+  

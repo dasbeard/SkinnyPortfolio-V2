@@ -1,0 +1,34 @@
+<div class="container">
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle
+        value="uploadAlbum"
+        [routerLink]="['/admin']"
+        routerLinkActive="mat-button-toggle-checked"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Upload New Album
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="allAlbums"
+        [routerLink]="['removeAlbum']"
+        routerLinkActive="mat-button-toggle-checked"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Delete Album
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="uploadLink"
+        [routerLink]="['newLink']"
+        routerLinkActive="mat-button-toggle-checked"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Add New Link
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="allLinks"
+        [routerLink]="['removeLink']"
+        routerLinkActive="mat-button-toggle-checked"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Delete Link
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <router-outlet></router-outlet>
+  

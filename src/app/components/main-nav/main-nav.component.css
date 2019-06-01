@@ -1,0 +1,141 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    /* background-image: url("../../assets/AntelopeCanyon.jpg"); */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    /* filter: saturate(0.5); */
+    /* filter: opacity(0.75); */
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .menuBtn {
+    color: red;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+  }
+  
+  .mobileHeader {
+    margin-left: 5%;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .desktopToolbar {
+    /* background-image: url("../../assets/sound-3.3.svg");
+    background-position: 50% 49%;
+    background-repeat: no-repeat;
+    background-size: cover; */
+  
+    position: sticky;
+    top: 0;
+    height: 1.5em;
+    margin: 0 auto 1em;
+    text-shadow: 0 2px 2px #000;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    justify-content: flex-end;
+  }
+  
+  .admin {
+    position: absolute;
+    top: 3em;
+    right: 1em;
+  }
+  
+  .navigation{
+    height: 1.5em;
+    margin-right: 15px;
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%);
+  }
+  
+  /* .mat-button {
+    line-height: 1em;
+    font-weight: 200;
+  } */
+  
+  .navLink{
+    font-weight: 800;
+    margin: 0 10px;
+  }
+  
+  .navigation a {
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    font-size: 0.8em;
+    text-decoration: none;
+  }
+  
+  .navigation a:hover {
+    color: rgb(143, 143, 143);
+    /* color: red; */
+  }
+  
+  
+  .colorButton {
+    border-bottom: 2px solid rgb(112, 112, 112);
+    border-radius: 0;
+    /* width: 25%; */
+  }
+  
+  
+  
+  
+  
+  /* mobile */
+  @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
+    .mobileToolbar {
+      position: sticky;
+      top: 0;
+    }
+  }
+  
+  @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
+    .mobileToolbar {
+      position: sticky;
+      top: 0;
+      height: 35px;
+      margin-bottom: 1em;
+    }
+  
+    .menuBtn {
+      color: red;
+      position: absolute;
+      right: 15px;
+      top: -2px;
+    }
+    .mobileHeader {
+      /* display: none; */
+    }
+  
+    /* .mobileHeader::after {
+      margin-left: 5%;
+      font-size: 0.5em;
+      content: "Engineer - Mixer";
+    } */
+  }
+  

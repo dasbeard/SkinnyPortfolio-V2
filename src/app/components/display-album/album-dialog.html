@@ -1,0 +1,16 @@
+<div mat-dialog-content class="container">
+        <div class="image" >
+          <img src="{{ data.album.image }}" alt="" />
+        </div>
+      
+        <div class="info">
+          <h4 class="artist">{{ data.album.artist }}</h4>
+          <h4 class="album">{{ data.album.album }} | {{ data.album.year }}</h4>
+          <div class="credits">
+            <h4 *ngFor="let credit of data.album.credits">
+              {{ credit }}
+            </h4>
+          </div>
+        </div>
+      </div>
+      

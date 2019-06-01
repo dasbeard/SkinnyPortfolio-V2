@@ -1,0 +1,10 @@
+<div class="container" *ngIf="allLinks" [@.disabled]="animate" [@fadeIn]="{value:allLinks.length, params: {timing1: timing}}">
+    <div class="links" *ngFor="let link of allLinks" >
+      <a class=link href="{{ link.url }}" target="_blank">
+        <!-- <p class="title">{{ link.title }}</p> -->
+        <!-- <p class="separator">-</p> -->
+        <p class="description">{{ link.description }}</p>
+      </a>
+    </div>
+  </div>
+  

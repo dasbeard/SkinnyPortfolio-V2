@@ -1,0 +1,91 @@
+<mat-sidenav-container
+  class="sidenav-container"
+  (keydown.esc)="drawer.close()"
+  [hasBackdrop]="true"
+>
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    (click)="drawer.toggle()"
+    position="end"
+  >
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['']">Discography</a>
+      <a mat-list-item [routerLink]="['about']">About</a>
+      <a mat-list-item [routerLink]="['contact']">Contact</a>
+      <!-- <a mat-list-item [routerLink]="['admin']">Admin</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar
+      class="desktopToolbar mat-elevation-z10"
+      *ngIf="!(isHandset$ | async)"
+    >
+      <div class="navigation">
+        <button
+          mat-raised-button
+          class="admin"
+          (click)="check.signOut()"
+          *ngIf="check.isLoggedIn"
+        >
+          Sign Out
+        </button>
+
+        <div class="links">
+          <!-- mat-button -->
+          <a
+            class='navLink'
+            [routerLink]="['']"
+            routerLinkActive="colorButton"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Discography
+          </a>
+          <!-- mat-button -->
+          <a
+            class='navLink'
+            [routerLink]="['about']"
+            routerLinkActive="colorButton"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >About
+          </a>
+          <!-- mat-button -->
+          <a
+            class='navLink'
+            [routerLink]="['contact']"
+            routerLinkActive="colorButton"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Contact
+          </a>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <mat-toolbar
+      color="black"
+      class="mobileToolbar"
+      *ngIf="(isHandset$ | async)"
+    >
+      <a [routerLink]="['']" class="mobileHeader">Ryan Shanahan</a>
+
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        class="menuBtn"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <!-- test {{ isHandset$ | async }} -->
+
+
+    <!-- Add Content Here -->
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

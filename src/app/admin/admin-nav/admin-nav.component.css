@@ -1,0 +1,16 @@
+.container {
+  width: 80%;
+  max-width: 900px;
+  margin: 2em auto 0;
+  padding: 0 2em;
+  display: flex;
+  justify-content: center;
+}
+
+mat-button-toggle {
+  width: 165px;
+}
+
+mat-button-toggle-group {
+  box-shadow: 0px 5px 20px 0px rgba(75, 75, 75, 0.25);
+}
