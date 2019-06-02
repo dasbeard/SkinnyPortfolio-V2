@@ -38,7 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewLinkComponent } from './admin/new-link/new-link.component';
 import { RemoveLinkComponent } from './admin/remove-link/remove-link.component';
 import { RemoveAlbumComponent } from './admin/remove-album/remove-album.component';
-import { NewAlbumComponent } from './admin/new-album/new-album.component';
+import { NewAlbumComponent, uploadSnackBar } from './admin/new-album/new-album.component';
 import { LoginComponent } from './admin/login/login.component';
 import { ListLinksComponent } from './components/list-links/list-links.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
@@ -56,6 +56,7 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
     RemoveLinkComponent,
     RemoveAlbumComponent,
     NewAlbumComponent,
+    uploadSnackBar,
     LoginComponent,
     ListLinksComponent,
     ContactPageComponent,
@@ -97,5 +98,6 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
   providers: [],
   bootstrap: [AppComponent],
   // entryComponents: [AlbumDialog, uploadSnackBar]
+  entryComponents: [uploadSnackBar]
 })
 export class AppModule { }

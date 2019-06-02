@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import {
+  FormBuilder,
+  FormGroupDirective,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { LinkModel } from '../../models/links'
+import { DataService } from 'src/app/services/data.service';
+
 @Component({
   selector: 'app-new-link',
   templateUrl: './new-link.component.html',
@@ -7,9 +16,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewLinkComponent implements OnInit {
 
-  constructor() { }
+  newLink: FormGroup;
+  allLinks: LinkModel[];
+
+  constructor( 
+    private fb: FormBuilder, 
+    private dataService: DataService) { }
 
   ngOnInit() {
+    this.newLink = this.fb.group({
+      url: ["", Validators.required],
+      title: ["", Validators.required],
+      description: ["", Validators.required]
+    })
+  }
+
+  onSubmit(newLink, formDirective: FormGroupDirective): void {
+    this.dataService.addNewLink(newLink.value);
+    formDirective.resetForm();
   }
 
 }

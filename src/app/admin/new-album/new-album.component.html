@@ -1,3 +1,139 @@
-<p>
-  new-album works!
-</p>
+<div class="container">
+    <!-- <h1>
+      Upload New Album
+      <hr />
+    </h1> -->
+  
+    <form
+      class="formContainer"
+      [formGroup]="newAlbum"
+      #formDirective="ngForm"
+      (ngSubmit)="onSubmit(newAlbum, formDirective)"
+    >
+      <div class="input">
+        <mat-form-field>
+          <input
+            matInput
+            class="artist"
+            placeholder="Artist"
+            formControlName="artist"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            class="album"
+            placeholder="Album"
+            formControlName="album"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            class="year"
+            type="number"
+            placeholder="Year Released"
+            formControlName="year"
+            required
+            maxlength="4"
+            minlength="4"
+          />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Credits"
+            formControlName="credits"
+            required
+            />
+          </mat-form-field>
+          
+          <div
+          class="moreCredits"
+          formArrayName="moreCredits"
+          *ngFor="let credit of moreCredits.controls; let i = index"
+          >
+          <mat-form-field class="newCredits">
+            <input
+              matInput
+              placeholder="Credits"
+              [formControlName]="i"
+  
+            />
+          </mat-form-field>
+          <button 
+            mat-mini-fab 
+            color="primary"
+            class="removeCredit"
+            type="button" 
+            title="Remove Credit"
+            (click)="removeCredit(i)"
+            >
+            <mat-icon>
+              remove
+            </mat-icon>
+          </button>
+        </div>
+  
+        <button mat-raised-button 
+          type="button" 
+          class="addCreditBtn" 
+          title="Add Another Credit"
+          (click)="addCredit()">
+            <mat-icon
+            aria-label="Add Another Credit"
+            >add
+          </mat-icon>
+        </button>
+      </div>
+  
+      <div class="imageUpload">
+        <img
+          *ngIf="!reader"
+          class="image"
+          #albumCover
+          src="../../assets/AddImageHere.png"
+        />
+        <img *ngIf="reader" class="image" #albumCover src="#" />
+  
+        <input
+          class="file"
+          type="file"
+          style="display: none"
+          (change)="imagePreview($event)"
+          #fileInput
+          formControlName="image"
+        />
+        <button
+          mat-raised-button
+          type="button"
+          class="fileBtn"
+          (click)="fileInput.click()"
+          title="Pick album cover"
+        >
+          Choose File
+        </button>
+      </div>
+  
+      <button
+        mat-raised-button
+        class="btn"
+        type="submit"
+        [disabled]="!newAlbum.valid"
+        >
+        Submit
+      </button>
+    </form>
+  
+    <ng-container *ngIf="(uploadPercent | async); let uploadPercent">
+      <mat-progress-bar
+        mode="determinate"
+        *ngIf="uploadPercent !== 100"
+        [value]="uploadPercent"
+      ></mat-progress-bar>
+    </ng-container>
+  </div>
+  

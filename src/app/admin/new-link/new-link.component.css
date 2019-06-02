@@ -1,0 +1,49 @@
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 0.5em auto 0;
+    background-color: rgb(66, 66, 66);
+    border-radius: 4px;
+  }
+  
+  .formContainer{
+    padding: 1.5em 2em 3em;
+  }
+  
+  .container h1 {
+    text-align: center;
+    margin-bottom: 1.25em;
+  }
+  
+  .formInput {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "title desc"
+      "url desc";
+  }
+  
+  .title {
+    grid-area: title;
+    margin-right: 5%;
+  }
+  
+  .url {
+    grid-area: url;
+    margin-right: 5%;
+  }
+  
+  .desc {
+    grid-area: desc;
+    margin-left: 5%;
+    /* height: 110px; */
+    /* outline: 1px solid red; */
+  }
+  
+  .formContainer button {
+    margin-top: 2em;
+    width: 400px;
+    margin-left: calc(50% - 200px);
+  }
+  

@@ -1,3 +1,56 @@
-<p>
-  new-link works!
-</p>
+<div class="container">
+    <!-- <h1>
+      Upload New Link
+      <hr />
+    </h1> -->
+  
+    <form
+      class="formContainer"
+      [formGroup]="newLink"
+      #formDirective="ngForm"
+      (ngSubmit)="onSubmit(newLink, formDirective)"
+    >
+      <div class="formInput">
+        <mat-form-field class="title">
+          <input
+            matInput
+            placeholder="Article Title"
+            formControlName="title"
+            required
+          />
+          <mat-hint align="start">This is the what will be displayed </mat-hint>
+        </mat-form-field>
+  
+        <mat-form-field class="url">
+          <input
+            matInput
+            placeholder="URL"
+            formControlName="url"
+            required
+            type="url"
+          />
+          <mat-hint align="start">This is where it will link to </mat-hint>
+        </mat-form-field>
+  
+        <mat-form-field class="desc">
+          <textarea
+            matInput
+            rows="5"
+            required
+            formControlName="description"
+            placeholder="Quick Description of the link"
+          ></textarea>
+          <mat-hint align="start">This is what will describe the link </mat-hint>
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        class="btn"
+        type="submit"
+        [disabled]="!newLink.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material';
+import { AlbumModel } from 'src/app/models/album';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-remove-album',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveAlbumComponent implements OnInit {
 
-  constructor() { }
+  allAlbums: AlbumModel[];
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ["cover", "artist", "album", "year", "delete"];
+  
+  constructor(private dataService: DataService) { 
+    this.dataService.getAllAlbums().subscribe(data => {
+      this.allAlbums = data;
+    })
+
+   }
 
   ngOnInit() {
+  }
+
+  delete(id: string) {
+    this.dataService.deleteAlbum(id);
   }
 
 }

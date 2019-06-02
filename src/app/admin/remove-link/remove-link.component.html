@@ -1,3 +1,45 @@
-<p>
-  remove-link works!
-</p>
+<div class="container">
+    <!-- <h1>
+      Delete Link
+      <hr />
+    </h1> -->
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="allLinks">
+        <ng-container matColumnDef="Title">
+          <th class="tableHeader title" mat-header-cell *matHeaderCellDef>
+            Title
+          </th>
+          <td class="title" mat-cell *matCellDef="let row">{{ row.title }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Link">
+          <th class="tableHeader link" mat-header-cell *matHeaderCellDef>URL</th>
+          <td class="link" mat-cell *matCellDef="let row">{{ row.url }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Description">
+          <th class="tableHeader desc" mat-header-cell *matHeaderCellDef>
+            Description
+          </th>
+          <td class="desc" mat-cell *matCellDef="let row">
+            {{ row.description }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Delete">
+          <th class="tableHeader delete" mat-header-cell *matHeaderCellDef>
+            Delete
+          </th>
+          <td class="delete" mat-cell *matCellDef="let row">
+            <a mat-flat-button color="warn" (click)="deleteLink(row.id)"
+              >Delete</a
+            >
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+  
