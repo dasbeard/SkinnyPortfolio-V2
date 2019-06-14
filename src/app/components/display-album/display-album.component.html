@@ -1,15 +1,33 @@
 <div
-  class="container mat-elevation-z5"
-  (click)="openDialog()"
+  class="album mat-elevation-z2"
   *ngIf="albumInfo != null"
+  @fade
+  title="Listen on Spotify"
 >
-  <div class="image" >
-    <img class="mat-elevation-z10" src="{{ albumInfo.image }}" alt="{{ albumInfo.artist }} {{ albumInfo.album }} album cover" />
-  </div>
 
-  <div class="info">
-    <p>{{ albumInfo.artist }}</p>
-    <p>{{ albumInfo.album }}</p>
-  </div>
+
+<img src="{{ albumInfo.image }}" 
+              alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+/>
+
+<div class="details">
+  <p class="year">{{ albumInfo.year }}</p>
+  <p class="artist"><strong> {{ albumInfo.artist }} </strong></p>
+  <p class="albumTitle">{{ albumInfo.album }}</p>
+  <p class="type"> Single </p>
 </div>
 
+
+
+
+</div>
+
+  
+
+<!-- 
+  <span>
+  
+  </span> 
+  -->
+  
+    

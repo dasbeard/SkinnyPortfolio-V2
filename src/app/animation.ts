@@ -14,6 +14,53 @@ export let albumAnimationTransition =
     ]);
 
 
+    export let fadeIn = 
+    transition('void =>*', [
+
+        query(':enter', style({opacity:1}), {optional:true}),
+         animate('2s {{timing1}} ease-in', keyframes([
+            style({opacity: 0}),
+            // style({opacity: 0.75}),
+            style({opacity: 1})
+            ]))
+        
+    ]);
+
+
+
+
+    export let dropDown = 
+        trigger('dropDown', [
+
+            transition('void =>*', [
+
+            query(':enter', style({ opacity: 0 }), {optional: true}),
+                animate('2s ease-in', keyframes([
+                style({opacity: 0, transform: 'translateY(-175px)', offset: 0}),
+                // style({opacity: 1, transform: 'translateY(5px)', offset: .75}),
+                style({opacity: 1, transform: 'translateY(0)', offset: 1})
+                ]))
+        ])
+    ]);
+
+
+
+    export let fade = 
+        trigger('fade', [
+
+            transition('void =>*', [
+
+            query(':enter', style({ opacity: 0 }), {optional: true}),
+                animate('1.8s 0s ease-in', keyframes([
+                style({opacity: 0 }),
+                style({opacity: 0.1 }),
+                style({opacity: 0.75 }),
+                style({opacity: 1 })
+                ]))
+        ])
+    ]);
+
+
     export let slideRight = 
         trigger('slideRight', [
 

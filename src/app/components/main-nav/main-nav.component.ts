@@ -4,11 +4,15 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { AuthService } from "../../services/auth.service";
 import { DataService } from "../../services/data.service";
+import { dropDown } from 'src/app/animation';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css']
+  styleUrls: ['./main-nav.component.css'],
+  animations:[
+    dropDown
+  ]
 })
 export class MainNavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver

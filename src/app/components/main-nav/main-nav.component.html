@@ -19,10 +19,11 @@
       <!-- <a mat-list-item [routerLink]="['admin']">Admin</a> -->
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content >
     <mat-toolbar
       class="desktopToolbar mat-elevation-z10"
       *ngIf="!(isHandset$ | async)"
+      @dropDown
     >
       <div class="navigation">
         <button
@@ -41,7 +42,16 @@
             [routerLink]="['']"
             routerLinkActive="colorButton"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Discography
+            >DISCOGRAPHY
+            
+          </a>
+          <!-- mat-button -->
+          <a
+            class='navLink'
+            [routerLink]="['']"
+            routerLinkActive="colorButton"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >PHOTOGRAPHY
           </a>
           <!-- mat-button -->
           <a
@@ -49,7 +59,7 @@
             [routerLink]="['about']"
             routerLinkActive="colorButton"
             [routerLinkActiveOptions]="{ exact: true }"
-            >About
+            >ABOUT
           </a>
           <!-- mat-button -->
           <a
@@ -57,7 +67,7 @@
             [routerLink]="['contact']"
             routerLinkActive="colorButton"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Contact
+            >CONTACT
           </a>
         </div>
       </div>

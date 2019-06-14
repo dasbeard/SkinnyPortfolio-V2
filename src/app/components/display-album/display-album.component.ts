@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from "@angular/material"
+import { Component, Input } from '@angular/core';
 import { AlbumModel } from '../../models/album'
+import { fade } from 'src/app/animation';
 
 export interface DialogData {
   album : AlbumModel
@@ -9,43 +9,15 @@ export interface DialogData {
 @Component({
   selector: 'app-display-album',
   templateUrl: './display-album.component.html',
-  styleUrls: ['./display-album.component.css']
+  styleUrls: ['./display-album.component.css'],
+  animations: [
+    fade
+  ]
 })
-export class DisplayAlbumComponent implements OnInit {
+export class DisplayAlbumComponent {
 
   @Input() albumInfo: AlbumModel
 
-  constructor( public dialog:MatDialog ) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AlbumDialog, {
-      minWidth: "50%",
-      maxWidth: "75%",
-      // maxHeight: "55vh",
-      data: {
-        album: this.albumInfo
-      }
-    });
-  }
-
-}
-
-
-@Component({
-  selector: "album-dialog",
-  templateUrl: "./album-dialog.html",
-  styleUrls: ["./album-dialog.css"]
-})
-export class AlbumDialog {
-  constructor(
-    public dialogRef: MatDialogRef<AlbumDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
-
-  closeDialog() {
-    this.dialogRef.close();
-  }
 }

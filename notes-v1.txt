@@ -1,0 +1,52 @@
+ALL
+change font - apple like
+Helvetica or apple
+font to source sans pro/raleway
+change container size
+	--- FIX MOBILE
+
+**Links All Cap
+**All White BG
+
+
+
+NAV
+**Center text in bar (height)
+**Make bigger 
+Add Name on Right as home link
+Add socal after name
+**add photog link
+
+
+
+HOME
+**remove image on home
+**remove bg on album
+**remove modal
+**add third col
+**display info on hover like sesrbans page
+**fade in album/not slide all at once, no stager
+**Spacing like https://www.cararobbins.com/
+
+
+
+ABOUT
+remove HR under press
+left align H3
+fix left margin
+relabel to 'Press'
+
+Discog / AllMusic Links above Press after lorum
+
+
+Contact
+remove social media section
+
+
+Admin
+Add URL for Spotify
+Link page - add date to sort by
+
+
+
+

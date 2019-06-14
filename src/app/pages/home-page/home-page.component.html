@@ -1,7 +1,7 @@
 <div class="container">
-    <app-banner class="banner" [@.disabled]="animate"></app-banner>
+    <!-- <app-banner class="banner" [@.disabled]="animate"></app-banner> -->
   
-    <div class="albumContainer" *ngIf="allAlbums" [@fadeIn]="{value:allAlbums.length, params: {timing1: timing}}">
+    <div class="albumContainer" *ngIf="allAlbums" >
       <h1>
         Discography
         <hr />
