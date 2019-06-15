@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { slideRight } from '../../animation';
+import { slideRight, fade, textFade } from '../../animation';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.css'],
   animations: [
-    slideRight
+    slideRight,
+    textFade
   ]
 })
 export class ContactPageComponent implements OnInit, OnDestroy {

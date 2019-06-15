@@ -27,14 +27,14 @@
   }
 
   .menuBtn {
-    color: red;
+    color: rgba(255, 255, 255, .9);
     position: absolute;
     right: 15px;
-    top: 5px;
+    top: 7px;
   }
   
   .mobileHeader {
-    margin-left: 5%;
+    margin-left: 15px;
     text-decoration: none;
     color: white;
   }
@@ -59,37 +59,80 @@
     right: 1em;
   }
   
-  .navigation{
-    height: 1.5em;
-    line-height: 1.4em;
-    margin-right: 15px;
-    /* background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%); */
+  .title {
+    margin-left: 20px;
+    display: inline-block;
   }
-    
+  
+  .title h1 {
+    /* font-family: 'Raleway', sans-serif !important; */
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 1.25em;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    cursor: pointer;
+  }
+
+  .title .socialIcons {
+    display: inline;
+    position: relative;
+    top: 3px;
+  }
+
+  .title .icon {
+    fill: #fff;
+    margin-left: .5em;
+  }
+  
+  .title .icon svg {
+    width: 1em;
+    height: 1em;
+  }
+  
+  .title .icon:hover {
+    fill:rgb(247,119,55)
+  }
+  
+  .title .icon:hover:nth-child(2) {
+    fill: rgb(0, 172, 237);
+  }
+
+  .title .filter {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 1));
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .navigation{
+    margin-right: 15px;
+  }
+
+  .navigation a{
+    color: rgba(255, 255, 255, 1); 
+  }
+
   .navLink{
-    font-weight: 800;
-    margin: 0 10px;
+    margin: 0 3px;
   }
   
   .navigation a {
     /* font-family: 'Raleway', sans-serif !important; */
     font-family: 'Source Sans Pro', sans-serif !important;
 
-    color: #fff;
-    font-size: 0.8em;
+    font-size: 0.75em;
     text-decoration: none;
   }
   
   .navigation a:hover {
-    color: rgb(99, 99, 99);
-    /* color: rgb(143, 143, 143); */
+    color: rgba(255, 255, 255, .75);
   }
   
   
   .colorButton {
-    border-bottom: 2px solid rgb(112, 112, 112);
-    border-radius: 0;
-    /* width: 25%; */
+    opacity: .75;
   }
   
   
@@ -101,6 +144,7 @@
     .mobileToolbar {
       position: sticky;
       top: 0;
+      background-color: rgba(50, 50, 50, .85);
     }
   }
   
@@ -110,13 +154,14 @@
       top: 0;
       height: 35px;
       margin-bottom: 1em;
+      background-color: rgba(50, 50, 50, .85);
     }
   
     .menuBtn {
-      color: red;
+      /* color: red; */
       position: absolute;
       right: 15px;
-      top: -2px;
+      top: -3px;
     }
     .mobileHeader {
       /* display: none; */

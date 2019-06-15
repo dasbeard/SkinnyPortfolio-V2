@@ -1,9 +1,10 @@
 ALL
-change font - apple like
-Helvetica or apple
-font to source sans pro/raleway
+**change font - apple like - Helvetica or apple - font to source sans pro/raleway
 change container size
-	--- FIX MOBILE
+
+
+FIX MOBILE
+
 
 **Links All Cap
 **All White BG

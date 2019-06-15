@@ -35,9 +35,8 @@ export let albumAnimationTransition =
             transition('void =>*', [
 
             query(':enter', style({ opacity: 0 }), {optional: true}),
-                animate('2s ease-in', keyframes([
-                style({opacity: 0, transform: 'translateY(-175px)', offset: 0}),
-                // style({opacity: 1, transform: 'translateY(5px)', offset: .75}),
+                animate('.7s cubic-bezier(.51,.88,.62,.78)', keyframes([
+                style({opacity: 0, transform: 'translateY(-2em)', offset: 0}),
                 style({opacity: 1, transform: 'translateY(0)', offset: 1})
                 ]))
         ])
@@ -51,7 +50,23 @@ export let albumAnimationTransition =
             transition('void =>*', [
 
             query(':enter', style({ opacity: 0 }), {optional: true}),
-                animate('1.8s 0s ease-in', keyframes([
+                animate('1.8s 0s cubic-bezier(.78,.46,.67,.81)', keyframes([
+                style({opacity: 0 }),
+                style({opacity: 0.1 }),
+                style({opacity: 0.75 }),
+                style({opacity: 1 })
+                ]))
+        ])
+    ]);
+
+
+    export let textFade = 
+        trigger('textFade', [
+
+            transition('void =>*', [
+
+            query(':enter', style({ opacity: 0 }), {optional: true}),
+                animate('.8s 0s ease-in', keyframes([
                 style({opacity: 0 }),
                 style({opacity: 0.1 }),
                 style({opacity: 0.75 }),

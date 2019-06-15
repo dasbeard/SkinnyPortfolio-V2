@@ -1,15 +1,10 @@
 .container {
-    width: 80%;
-    max-width: 900px;
+    width: 90%;
     margin: 2em auto;
     padding: 1em 2em 2em;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* min-height: 60vh; */
-  }
-  
-  .pageContainer {
-    display: grid;
-    grid-template-columns: [lSide] 1.5fr [rSide] 1fr;
+    color: #000;
+    border-radius: 4px;
+    /* background-color: rgb(250, 250, 250); */
   }
   
   .header {
@@ -19,7 +14,30 @@
     margin-bottom: 1.25em;
     margin-top: 0;
   }
+
+  .pageContainer {
+    display: grid;
+    grid-template-columns: [lSide] 1.25fr [rSide] 1fr;
+  }
   
+  .image {
+    grid-area: rSide;
+    width: 90%;
+    height: 100%;
+    max-height: 600px;
+    margin-left: 10%;
+    border-radius: 4px;
+  }
+  
+  .image img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    /* contain: strict; */
+    object-fit: cover;
+  }
+ 
   .about {
     grid-area: lSide;
     max-width: 100%;
@@ -30,30 +48,27 @@
     margin: 0;
   }
   
-  .links {
-    padding: 1em;
-  }
-  
-  .links h3 {
-    text-align: center;
-  }
-  
-  .image {
-    grid-area: rSide;
-    height: 350px;
-    width: 350px;
-    margin-left: calc(50% - 175px);
-  }
-  
-  .image img {
-    height: 100%;
+  .externalLinks {
     width: 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    border-radius: 4px;
   }
   
+  .externalLinks .press {
+    width: 55%;
+    display: inline-block;
+  }
+  
+  .externalLinks .plugins {
+    outline: 1px solid red;
+
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 4%;
+    width: 40%;
+  }
+
+ 
+
+
   /* mobile */
   @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
     .container {
@@ -76,7 +91,7 @@
       text-align: center;
     }
   
-    .links {
+    .externalLinks {
       grid-area: rside;
       text-align: center;
     }
@@ -137,7 +152,7 @@
       margin-right: 0.75em;
     }
   
-    .links {
+    .externalLinks {
       /* grid-area: rside; */
       text-align: center;
     }

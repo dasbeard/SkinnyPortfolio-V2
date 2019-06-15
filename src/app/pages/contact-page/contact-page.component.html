@@ -1,14 +1,14 @@
-<div class="container mat-elevation-z2">
+<div class="container ">
     <h1 class="header">
       Contact
       <hr />
     </h1>
     <div class="pageContainer">
-      <div class="image mat-elevation-z5" [@.disabled]="animate" @slideRight>
-        <img src="../../assets/Skinny-AntelopeValley.jpg" alt="" />
+      <div class="image mat-elevation-z1" [@.disabled]="animate" @slideRight>
+        <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2FSkinny-AntelopeValley.jpg?alt=media&token=be554c83-46cb-4af4-b914-4b10fc611889" alt="" />
       </div>
   
-      <div class="text">
+      <div class="text" [@.disabled]="animate" @textFade>
         <p>
           Managment:
         </p>
@@ -17,9 +17,10 @@
         </p>
   
         <a href="mailto:buffyh@me.com" title="Send an Email">buffyh@me.com</a>
-        <hr class='divider'  />
+      
+        <!-- <hr class='divider'  /> -->
   
-        <div class="social">
+        <!-- <div class="social">
           <p class="socialHeader">Social Media</p>
   
           <a href="https://www.instagram.com/engineerskinny/" target="_blank" title="Go to Instagram" class="filter">
@@ -37,7 +38,8 @@
               />
             </svg>
           </a>
-        </div>
+        </div> -->
+      
       </div>
     </div>
   </div>

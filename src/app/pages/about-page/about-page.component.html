@@ -1,9 +1,18 @@
-<div class="container mat-elevation-z2">
-    <h1 class="header">
+<div class="container">
+    
+  <h1 class="header">
       About
       <hr />
     </h1>
+    
     <div class="pageContainer">
+
+      <div class="image mat-elevation-z1" [@.disabled]='animate' @slideLeft>
+      
+        <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fryan-shanahan.jpg?alt=media&token=a5c27238-4470-4647-afe3-6f54093c9d59" alt="Ryan Shanahan" />
+      
+      </div>
+    
       <div class="about">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur
@@ -13,20 +22,38 @@
           consectetur adipisicing elit. Eaque aspernatur inventore corporis
           assumenda aliquam quo minus, blanditiis quam sapiente ad voluptatibus
           officiis? Eveniet ullam voluptate fugit, voluptas nihil autem
-          asperiores?
+          asperiores?  Optio libero consectetur sed iusto
+          voluptate reprehenderit minima autem quo facere molestiae, quis
+          inventore magnam quas perspiciatis.
         </p>
-        <div class="links">
-          <h3>
-            Press Articles
-            <hr />
-          </h3>
-          <app-list-links></app-list-links>
+
+        <div class="creditSource">
+          <a href="">AllMusic</a>
+          <a href="">Discogs</a>
         </div>
+        
+        <div class="externalLinks">
+          
+          <div class="press">
+
+            <h3>
+              Press
+            </h3>
+            
+            <app-list-links></app-list-links>
+          
+          </div>
+        
+          <div class="plugins">
+            <a href="">testing</a>
+            <a href="">testing</a>
+            <a href="">testing</a>
+          </div>
+
+        </div>
+      
       </div>
   
-      <div class="image mat-elevation-z5" [@.disabled]='animate' @slideLeft>
-        <img src="../../assets/ryan-shanahan.jpg" alt="Ryan Shanahan" />
-      </div>
     </div>
   </div>
   
