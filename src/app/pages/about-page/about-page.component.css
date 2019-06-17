@@ -34,7 +34,6 @@
     height: 100%;
     background-repeat: no-repeat;
     border-radius: 4px;
-    /* contain: strict; */
     object-fit: cover;
   }
  
@@ -48,22 +47,54 @@
     margin: 0;
   }
   
+  .about .creditSource {
+    /* outline: 1px solid blue; */
+    margin: 25px auto;
+    width: 75%;
+    display: flex;
+  }
+
+  .about .creditSource .spacer {
+    flex: 1 1 auto;
+  }
+ 
+  .about .creditSource .allmusic {
+    height: 25px;
+  }
+  .about .creditSource .discogs {
+    height: 30px;
+  }
+
   .externalLinks {
     width: 100%;
+    display: grid;
+    grid-template-columns: [press]55% [plugins]45%;
   }
   
   .externalLinks .press {
-    width: 55%;
-    display: inline-block;
+    grid-area: press;
+  }
+
+  .externalLinks .press h3{
+    margin-top: 0;
+    margin-bottom: .5em;
   }
   
   .externalLinks .plugins {
-    outline: 1px solid red;
+    grid-area: plugins;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 4%;
-    width: 40%;
+  .externalLinks .plugins img {
+    height: 50px;
+    width: auto;
+  }
+  
+  .externalLinks .plugins a:nth-child(even) {
+    
+    margin: 1em;
   }
 
  

@@ -48,6 +48,7 @@ import { DisplayAlbumComponent } from './components/display-album/display-album.
 import { BannerComponent } from './components/banner/banner.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { PhotographyPageComponent } from './pages/photography-page/photography-page.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
     DisplayAlbumComponent,
     BannerComponent,
     MainNavComponent,
-    AdminNavComponent
+    AdminNavComponent,
+    PhotographyPageComponent
   ],
   imports: [
     BrowserModule,

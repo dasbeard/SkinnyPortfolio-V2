@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { slideLeft } from '../../animation';
+import { slideLeft, fade, textFade, dropDown, dropDownStagger, fadeIn } from '../../animation';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,7 +7,9 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './about-page.component.html',
   styleUrls: ['./about-page.component.css'],
   animations: [
-    slideLeft
+    slideLeft,
+    textFade,
+    // dropDownStagger
   ]
 })
 export class AboutPageComponent implements OnInit {

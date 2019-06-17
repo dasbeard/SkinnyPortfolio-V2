@@ -8,10 +8,17 @@ import { NewLinkComponent } from './admin/new-link/new-link.component';
 import { RemoveAlbumComponent } from './admin/remove-album/remove-album.component';
 import { RemoveLinkComponent } from './admin/remove-link/remove-link.component';
 import { LoginComponent } from './admin/login/login.component';
+import { PhotographyPageComponent } from './pages/photography-page/photography-page.component';
 
 const routes: Routes = [
   {
     path: "",
+    pathMatch: "full",
+    component: HomePageComponent,
+    children: []
+  },
+  {
+    path: "discography",
     pathMatch: "full",
     component: HomePageComponent,
     children: []
@@ -26,6 +33,12 @@ const routes: Routes = [
     path: "contact",
     pathMatch: "full",
     component: ContactPageComponent,
+    children: []
+  },
+  {
+    path: "photography",
+    pathMatch: "full",
+    component: PhotographyPageComponent,
     children: []
   },
   {
