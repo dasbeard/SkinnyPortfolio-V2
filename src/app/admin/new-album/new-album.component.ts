@@ -103,10 +103,13 @@ export class NewAlbumComponent implements OnInit {
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {
       // console.log(data);
-      this.uploadPercent = this.dataService.uploadPercent;
-      if (data === 100) {
-        this.openSnackBar();
-      }
+
+        this.uploadPercent = this.dataService.uploadPercent;
+        // console.log(this.uploadPercent);
+        
+        if (data === 100) {
+          this.openSnackBar();
+        }
     });
 
     this.removeAllCredits(tempCredits2);
@@ -141,7 +144,7 @@ export class NewAlbumComponent implements OnInit {
 
   openSnackBar() {
     this.snackBar.openFromComponent(uploadSnackBar, {
-      duration: 800
+      duration: 900
     })
   }
 }

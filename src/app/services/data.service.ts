@@ -11,6 +11,7 @@ import { AlbumModel } from "../models/album";
 import { LinkModel } from "../models/links";
 
 import * as firebase from "firebase";
+import { async } from 'q';
 
 
 @Injectable({
@@ -30,7 +31,7 @@ export class DataService {
 
   // For Image upload
   uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
+  // downloadURL: Observable<string>;
   URL: string;
 
   private basePath: string = "uploads";
@@ -48,7 +49,7 @@ export class DataService {
     private storage: AngularFireStorage
   ) { 
     this.albumCollection = this.afs.collection<AlbumModel>("albums", ref =>
-    ref.orderBy("year", "desc")
+      ref.orderBy("year", "desc")
     );
 
     this.linksCollection = afs.collection<LinkModel>("links");
@@ -59,8 +60,17 @@ export class DataService {
     const file = data.image;
     const date = new Date().toISOString();
 
-    const filePath = `Originals/${data.artist}-${data.album}-${date}`; // Names new Image
-    const fileRef = this.storage.ref(filePath);
+    var [fname, extension] = file.name.split('.')
+    .reduce((acc, val, i, arr) => (i == arr.length - 1) 
+        ? [acc[0].substring(1), val] 
+        : [[acc[0], val].join('.')], []);
+
+    // console.log(data.image);
+ 
+    const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
+    const filePath = `Originals/${fileName}`; // Names new Image
+    // const filePath = `Originals/${data.artist}-${data.album}-${date}.${extension}`; // Names new Image
+    // const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
     // Observe percent change
@@ -69,22 +79,75 @@ export class DataService {
     task 
       .snapshotChanges()
       .pipe(
-        finalize( () => {
-          this.downloadURL = fileRef.getDownloadURL();
+        finalize( async () => {
+          // this.downloadURL = fileRef.getDownloadURL(); // Dont Use
 
-          this.printURL(data);
+          // this.printURL(data); // Original
+
+
+          // --- Second Attempt
+          // setTimeout(() => {
+          //   this.getImageURLs( data, fileName);
+          // }, 500);
+          // --- End 2nd
+
+          // --- Third Attempt
+          let newAlbum = await this.getImageURLs( data, fileName);
+          console.log( 'back from fetching links' +  newAlbum );
+          
+
+
+          // this.getImageURLs( data, fileName);
+          
         })
       )
       .subscribe();
   }
 
-  async printURL(albumData) {
-    this.downloadURL.subscribe( async newUrl => {
-      albumData.image = newUrl;
 
-      this.albumCollection.add(albumData);
-    })
+  async getImageURLs( albumData, fileName ) {
+    console.log('in Function');
+
+
+    // !! Implement a Try/Catch for the thumbs
+    
+
+    const originalImage = `Originals/${fileName}`;
+    const image75 = `Originals/thumb@75_${fileName}`;
+    const image200 = `Originals/thumb@200_${fileName}`;
+    const image425 = `Originals/thumb@425_${fileName}`;
+
+    console.log('fetching image Original');
+    albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
+    console.log('fetching image 75');
+    albumData.image75 = await firebase.storage().ref(image75).getDownloadURL();
+    console.log('fetching image 200');
+    albumData.image200 = await firebase.storage().ref(image200).getDownloadURL();
+    console.log('fetching image 425');
+    albumData.image425 = await firebase.storage().ref(image425).getDownloadURL();
+    
+    // this.albumCollection.add(albumData);
+    
+    console.log('returning Album Data');
+    return albumData;
+    
+    
+    
   }
+
+
+
+  // async printURL(albumData) {
+    
+  //   this.downloadURL.subscribe( async newUrl => {
+  //     albumData.image = newUrl;
+  //     console.log('testing dataservice');
+      
+  //     console.log(newUrl);
+      
+  //     this.albumCollection.add(albumData);
+  //   })
+  // }
 
   getAllAlbums() {
     this.allAlbums = this.albumCollection.snapshotChanges().pipe(
@@ -102,6 +165,8 @@ export class DataService {
 
 
   // TODO: Delete image when deleting album
+    // firebase.storage().ref(`ImageName`).delete()  // Remove Image based on name
+
   deleteAlbum(albumID:string) {
     this.singleAlbum = this.afs.doc(`albums/${albumID}`);
     this.singleAlbum.delete();
