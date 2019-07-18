@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { map, finalize, retry } from "rxjs/operators";
 import { AlbumModel } from "../models/album";
 import { LinkModel } from "../models/links";
@@ -31,7 +31,6 @@ export class DataService {
 
   // For Image upload
   uploadPercent: Observable<number>;
-  uploadComplete: Boolean = false;
   // downloadURL: Observable<string>;
   URL: string;
 
@@ -81,29 +80,8 @@ export class DataService {
       .snapshotChanges()
       .pipe(
         finalize( async () => {
-          // this.downloadURL = fileRef.getDownloadURL(); // Dont Use
-
-          // this.printURL(data); // Original
-
-
-          // --- Second Attempt
-          // setTimeout(() => {
-          //   this.getImageURLs( data, fileName);
-          // }, 500);
-          // --- End 2nd
-
-          // --- Third Attempt
-          // let newAlbum = await this.getImageURLs( data, fileName);
-          // console.log( 'back from fetching links' +  newAlbum );
-          
           let newAlbum = await this.getImageURLs( data, fileName);
-          // console.log(newAlbum);
           this.albumCollection.add(newAlbum);
-          this.uploadComplete = true;
-          setTimeout(() => {
-            this.uploadComplete=false;
-          }, 2500);
-          
         })
       )
       .subscribe();
@@ -111,14 +89,15 @@ export class DataService {
 
 
   async getImageURLs( albumData, fileName ) {
-
+    
     const originalImage = `Originals/${fileName}`;
     const image75 = `Originals/thumb@75_${fileName}`;
     const image200 = `Originals/thumb@200_${fileName}`;
     const image425 = `Originals/thumb@425_${fileName}`;
 
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
-    
+
+
     const retries = 10;
 
     albumData.image75 = await this.getThumbs( image75, retries );
@@ -131,37 +110,18 @@ export class DataService {
 
     async getThumbs(fileName, retries) {
       let i;
-      let temp;
+      let newURL;
       for (i = 0; i < retries; ++i) {
         try {
-          temp = await firebase.storage().ref(fileName).getDownloadURL();
+          newURL = await firebase.storage().ref(fileName).getDownloadURL();
           break;
         } catch(err) {
           // console.log(err);
         }
       }
-      return temp
+      return newURL
     }
 
-
-
-  checkAgain( fileName, count ){
-    console.log(fileName, count);
-
-    
-  }
-
-  // async printURL(albumData) {
-    
-  //   this.downloadURL.subscribe( async newUrl => {
-  //     albumData.image = newUrl;
-  //     console.log('testing dataservice');
-      
-  //     console.log(newUrl);
-      
-  //     this.albumCollection.add(albumData);
-  //   })
-  // }
 
   getAllAlbums() {
     this.allAlbums = this.albumCollection.snapshotChanges().pipe(

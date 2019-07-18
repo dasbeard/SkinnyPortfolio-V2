@@ -102,19 +102,22 @@ export class NewAlbumComponent implements OnInit {
 
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {
-      // console.log(data);
+    // console.log(data);
 
-        this.uploadPercent = this.dataService.uploadPercent;
-        // console.log(this.uploadPercent);
-        
-      if (this.dataService.uploadComplete = true){
-          this.openSnackBar();
+      this.uploadPercent = this.dataService.uploadPercent;
+      // console.log(this.uploadPercent);
+
+    if (data === 100) {
+      setTimeout(() => {
+        this.openSnackBar();
+      }, 750);
+    
       }
-
-        // if (data === 100) {
-        //   this.openSnackBar();
-        // }
     });
+    
+    // let uploadComplete = this.dataService.uploadComplete;
+    // console.log(uploadComplete);
+    
 
     this.removeAllCredits(tempCredits2);
     formDirective.resetForm();
