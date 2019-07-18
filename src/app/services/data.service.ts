@@ -11,7 +11,7 @@ import { AlbumModel } from "../models/album";
 import { LinkModel } from "../models/links";
 
 import * as firebase from "firebase";
-import { async } from 'q';
+// import { async } from 'q';
 
 
 @Injectable({
@@ -31,6 +31,7 @@ export class DataService {
 
   // For Image upload
   uploadPercent: Observable<number>;
+  uploadComplete: Boolean = false;
   // downloadURL: Observable<string>;
   URL: string;
 
@@ -92,12 +93,16 @@ export class DataService {
           // --- End 2nd
 
           // --- Third Attempt
-          let newAlbum = await this.getImageURLs( data, fileName);
-          console.log( 'back from fetching links' +  newAlbum );
+          // let newAlbum = await this.getImageURLs( data, fileName);
+          // console.log( 'back from fetching links' +  newAlbum );
           
-
-
-          // this.getImageURLs( data, fileName);
+          let newAlbum = await this.getImageURLs( data, fileName);
+          // console.log(newAlbum);
+          this.albumCollection.add(newAlbum);
+          this.uploadComplete = true;
+          setTimeout(() => {
+            this.uploadComplete=false;
+          }, 2500);
           
         })
       )
@@ -106,36 +111,45 @@ export class DataService {
 
 
   async getImageURLs( albumData, fileName ) {
-    console.log('in Function');
-
-
-    // !! Implement a Try/Catch for the thumbs
-    
 
     const originalImage = `Originals/${fileName}`;
     const image75 = `Originals/thumb@75_${fileName}`;
     const image200 = `Originals/thumb@200_${fileName}`;
     const image425 = `Originals/thumb@425_${fileName}`;
 
-    console.log('fetching image Original');
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
-    console.log('fetching image 75');
-    albumData.image75 = await firebase.storage().ref(image75).getDownloadURL();
-    console.log('fetching image 200');
-    albumData.image200 = await firebase.storage().ref(image200).getDownloadURL();
-    console.log('fetching image 425');
-    albumData.image425 = await firebase.storage().ref(image425).getDownloadURL();
     
-    // this.albumCollection.add(albumData);
-    
-    console.log('returning Album Data');
+    const retries = 10;
+
+    albumData.image75 = await this.getThumbs( image75, retries );
+    albumData.image200 = await this.getThumbs( image200, retries );
+    albumData.image425 = await this.getThumbs( image425, retries );
     return albumData;
-    
-    
     
   }
 
 
+    async getThumbs(fileName, retries) {
+      let i;
+      let temp;
+      for (i = 0; i < retries; ++i) {
+        try {
+          temp = await firebase.storage().ref(fileName).getDownloadURL();
+          break;
+        } catch(err) {
+          // console.log(err);
+        }
+      }
+      return temp
+    }
+
+
+
+  checkAgain( fileName, count ){
+    console.log(fileName, count);
+
+    
+  }
 
   // async printURL(albumData) {
     

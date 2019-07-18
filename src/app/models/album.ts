@@ -7,7 +7,9 @@ export class AlbumModel {
     image200?: string;
     image75?: string;
     year?: number;
+    spotifyLink?: string;
     credits?: [Credits];
+
   }
   
   export class Credits {

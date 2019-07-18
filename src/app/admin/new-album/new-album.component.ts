@@ -107,9 +107,13 @@ export class NewAlbumComponent implements OnInit {
         this.uploadPercent = this.dataService.uploadPercent;
         // console.log(this.uploadPercent);
         
-        if (data === 100) {
+      if (this.dataService.uploadComplete = true){
           this.openSnackBar();
-        }
+      }
+
+        // if (data === 100) {
+        //   this.openSnackBar();
+        // }
     });
 
     this.removeAllCredits(tempCredits2);
