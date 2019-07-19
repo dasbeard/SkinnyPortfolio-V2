@@ -68,9 +68,7 @@ export class DataService {
     // console.log(data.image);
  
     const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
-    const filePath = `Originals/${fileName}`; // Names new Image
-    // const filePath = `Originals/${data.artist}-${data.album}-${date}.${extension}`; // Names new Image
-    // const fileRef = this.storage.ref(filePath);
+    const filePath = `Albums/${fileName}`; // Names new Image
     const task = this.storage.upload(filePath, file);
 
     // Observe percent change
@@ -90,35 +88,40 @@ export class DataService {
 
   async getImageURLs( albumData, fileName ) {
     
-    const originalImage = `Originals/${fileName}`;
-    const image75 = `Originals/thumb@75_${fileName}`;
-    const image200 = `Originals/thumb@200_${fileName}`;
-    const image425 = `Originals/thumb@425_${fileName}`;
+    const originalImage = `Albums/${fileName}`;
+    const image75 = `Albums/thumb@75_${fileName}`;
+    const image200 = `Albums/thumb@200_${fileName}`;
+    const image425 = `Albums/thumb@425_${fileName}`;
 
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
 
 
-    const retries = 10;
 
-    albumData.image75 = await this.getThumbs( image75, retries );
-    albumData.image200 = await this.getThumbs( image200, retries );
-    albumData.image425 = await this.getThumbs( image425, retries );
+    albumData.image75 = await this.getThumbs( image75 );
+    albumData.image200 = await this.getThumbs( image200 );
+    albumData.image425 = await this.getThumbs( image425 );
     return albumData;
     
   }
 
 
-    async getThumbs(fileName, retries) {
-      let i;
+    async getThumbs(fileName) {
+      const retries = 10;
       let newURL;
+      // let error;
+      let i;
+
       for (i = 0; i < retries; ++i) {
         try {
           newURL = await firebase.storage().ref(fileName).getDownloadURL();
           break;
         } catch(err) {
           // console.log(err);
+          // error = err;
         }
       }
+      console.log(i);
+      // console.log(error);
       return newURL
     }
 

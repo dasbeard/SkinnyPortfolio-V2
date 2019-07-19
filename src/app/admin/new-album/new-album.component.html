@@ -13,6 +13,7 @@
       <div class="input">
         <mat-form-field>
           <input
+            autofocus
             matInput
             class="artist"
             placeholder="Artist"
@@ -39,6 +40,15 @@
             required
             maxlength="4"
             minlength="4"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            class="spotify"
+            placeholder="Spotify Link"
+            formControlName="spotify"
+            required
           />
         </mat-form-field>
   
@@ -95,7 +105,7 @@
           *ngIf="!reader"
           class="image"
           #albumCover
-          src="../../assets/AddImageHere.png"
+          src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2FAddImageHere.png?alt=media&token=c478db56-88a4-4f91-a54e-3ece8a9bb338"
         />
         <img *ngIf="reader" class="image" #albumCover src="#" />
   

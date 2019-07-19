@@ -65,6 +65,7 @@ export class NewAlbumComponent implements OnInit {
       album: ["", Validators.required],
       year: ["", Validators.required],
       credits: ["", Validators.required],
+      spotify: ["", Validators.required],
       image: ["", Validators.required],
       moreCredits: this.fb.array([])
     })
@@ -87,6 +88,7 @@ export class NewAlbumComponent implements OnInit {
       artist: this.newAlbum.value.artist,
       album: this.newAlbum.value.album,
       year: this.newAlbum.value.year,
+      spotify: this.newAlbum.value.spotify,
       image: this.selectedFile,
       credits: []
     };
@@ -110,7 +112,7 @@ export class NewAlbumComponent implements OnInit {
     if (data === 100) {
       setTimeout(() => {
         this.openSnackBar();
-      }, 750);
+      }, 950);
     
       }
     });
