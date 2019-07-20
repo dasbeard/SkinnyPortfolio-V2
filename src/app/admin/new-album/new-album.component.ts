@@ -112,7 +112,7 @@ export class NewAlbumComponent implements OnInit {
     if (data === 100) {
       setTimeout(() => {
         this.openSnackBar();
-      }, 950);
+      }, 900);
     
       }
     });

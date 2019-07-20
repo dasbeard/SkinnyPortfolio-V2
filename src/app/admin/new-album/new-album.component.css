@@ -1,14 +1,6 @@
 .container {
-    width: 80%;
-    max-width: 900px;
-    margin: 0.5em auto 0;
-    background-color: rgb(66, 66, 66);
-    border-radius: 4px;
-  }
-  
-  .container h1 {
-    text-align: center;
-    margin-bottom: 1.25em;
+  width: 90%;
+  margin: 0.5em auto;  
   }
   
   .formContainer {
@@ -18,15 +10,18 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: auto 55px;
     grid-template-areas:
-      "input image"
-      "btn btn";
+    "input image"
+    "btn btn";
   }
   
   .input {
     grid-area: input;
-    /* outline: 1px solid yellow; */
   }
-  
+
+  .input .placeholder {
+    color: black;
+  }
+
   .input mat-form-field {
     display: block;
   }
@@ -35,7 +30,7 @@
     display: inline-block !important;
     width: 80%;
   }
-  
+
   .removeCredit{
     margin-left: 3%;
     background-color: #666;
@@ -54,9 +49,8 @@
     background-color: #999;
   }
   
-    .imageUpload {
+  .imageUpload {
     grid-area: image;
-    /* outline: 1px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,13 +58,10 @@
   
   .image {
     display: block;
-    /* outline: 1px solid cyan; */
   }
   
   .file {
     display: block;
-    /* outline: 1px solid pink; */
-    /* width: 225px; */
   }
   
   .fileBtn {
@@ -85,6 +76,7 @@
     min-width: 225px;
     max-height: 225px;
     max-width: 225px;
+    outline: 1px solid rgb(33, 33, 33)
   }
   
   .btn {

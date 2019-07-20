@@ -4,146 +4,147 @@
       <hr />
     </h1> -->
   
-    <form
-      class="formContainer"
-      [formGroup]="newAlbum"
-      #formDirective="ngForm"
-      (ngSubmit)="onSubmit(newAlbum, formDirective)"
+  <form
+    class="formContainer"
+    [formGroup]="newAlbum"
+    #formDirective="ngForm"
+    (ngSubmit)="onSubmit(newAlbum, formDirective)"
     >
-      <div class="input">
-        <mat-form-field>
-          <input
-            autofocus
-            matInput
-            class="artist"
-            placeholder="Artist"
-            formControlName="artist"
-            required
+
+    <div class="input">
+      <mat-form-field>
+        <input
+          autofocus
+          matInput
+          class="artist"
+          placeholder="Artist"
+          formControlName="artist"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          class="album"
+          placeholder="Album"
+          formControlName="album"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          class="year"
+          type="number"
+          placeholder="Year Released"
+          formControlName="year"
+          required
+          maxlength="4"
+          minlength="4"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          class="spotify"
+          placeholder="Spotify Link"
+          formControlName="spotify"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Credits"
+          formControlName="credits"
+          required
           />
         </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            class="album"
-            placeholder="Album"
-            formControlName="album"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            class="year"
-            type="number"
-            placeholder="Year Released"
-            formControlName="year"
-            required
-            maxlength="4"
-            minlength="4"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            class="spotify"
-            placeholder="Spotify Link"
-            formControlName="spotify"
-            required
-          />
-        </mat-form-field>
-  
-        <mat-form-field>
+        
+        <div
+        class="moreCredits"
+        formArrayName="moreCredits"
+        *ngFor="let credit of moreCredits.controls; let i = index"
+        >
+        <mat-form-field class="newCredits">
           <input
             matInput
             placeholder="Credits"
-            formControlName="credits"
-            required
-            />
-          </mat-form-field>
-          
-          <div
-          class="moreCredits"
-          formArrayName="moreCredits"
-          *ngFor="let credit of moreCredits.controls; let i = index"
-          >
-          <mat-form-field class="newCredits">
-            <input
-              matInput
-              placeholder="Credits"
-              [formControlName]="i"
-  
-            />
-          </mat-form-field>
-          <button 
-            mat-mini-fab 
-            color="primary"
-            class="removeCredit"
-            type="button" 
-            title="Remove Credit"
-            (click)="removeCredit(i)"
-            >
-            <mat-icon>
-              remove
-            </mat-icon>
-          </button>
-        </div>
-  
-        <button mat-raised-button 
+            [formControlName]="i"
+
+          />
+        </mat-form-field>
+        <button 
+          mat-mini-fab 
+          color="primary"
+          class="removeCredit"
           type="button" 
-          class="addCreditBtn" 
-          title="Add Another Credit"
-          (click)="addCredit()">
-            <mat-icon
-            aria-label="Add Another Credit"
-            >add
+          title="Remove Credit"
+          (click)="removeCredit(i)"
+          >
+          <mat-icon>
+            remove
           </mat-icon>
         </button>
       </div>
-  
-      <div class="imageUpload">
-        <img
-          *ngIf="!reader"
-          class="image"
-          #albumCover
-          src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2FAddImageHere.png?alt=media&token=c478db56-88a4-4f91-a54e-3ece8a9bb338"
-        />
-        <img *ngIf="reader" class="image" #albumCover src="#" />
-  
-        <input
-          class="file"
-          type="file"
-          style="display: none"
-          (change)="imagePreview($event)"
-          #fileInput
-          formControlName="image"
-        />
-        <button
-          mat-raised-button
-          type="button"
-          class="fileBtn"
-          (click)="fileInput.click()"
-          title="Pick album cover"
-        >
-          Choose File
-        </button>
-      </div>
-  
+
+      <button mat-raised-button 
+        type="button" 
+        class="addCreditBtn" 
+        title="Add Another Credit"
+        (click)="addCredit()">
+          <mat-icon
+          aria-label="Add Another Credit"
+          >add
+        </mat-icon>
+      </button>
+    </div>
+
+    <div class="imageUpload">
+      <img
+        *ngIf="!reader"
+        class="image"
+        #albumCover
+        src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2FAddImageHere.png?alt=media&token=c478db56-88a4-4f91-a54e-3ece8a9bb338"
+      />
+      <img *ngIf="reader" class="image" #albumCover src="#" />
+
+      <input
+        class="file"
+        type="file"
+        style="display: none"
+        (change)="imagePreview($event)"
+        #fileInput
+        formControlName="image"
+      />
       <button
         mat-raised-button
-        class="btn"
-        type="submit"
-        [disabled]="!newAlbum.valid"
-        >
-        Submit
+        type="button"
+        class="fileBtn"
+        (click)="fileInput.click()"
+        title="Pick album cover"
+      >
+        Choose File
       </button>
-    </form>
+    </div>
+
+    <button
+      mat-raised-button
+      class="btn"
+      type="submit"
+      [disabled]="!newAlbum.valid"
+      >
+      Submit
+    </button>
+  </form>
   
-    <ng-container *ngIf="(uploadPercent | async); let uploadPercent">
+    <!-- <ng-container *ngIf="(uploadPercent | async); let uploadPercent">
       <mat-progress-bar
         mode="determinate"
         *ngIf="uploadPercent !== 100"
         [value]="uploadPercent"
       ></mat-progress-bar>
-    </ng-container>
-  </div>
+    </ng-container> -->
+</div>
   
