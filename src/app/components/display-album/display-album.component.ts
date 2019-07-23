@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AlbumModel } from '../../models/album'
 import { fade } from 'src/app/animation';
+import { DataService } from 'src/app/services/data.service';
 
 export interface DialogData {
   album : AlbumModel
@@ -17,7 +18,11 @@ export interface DialogData {
 export class DisplayAlbumComponent {
 
   @Input() albumInfo: AlbumModel
+  images:Object;
 
-  constructor() { }
+  constructor(private dataservice: DataService) { 
+
+  }
+  
 
 }

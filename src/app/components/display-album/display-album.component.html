@@ -6,9 +6,14 @@
 >
 
 
-<img src="{{ albumInfo.image }}" 
-              alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+
+<img src="{{ albumInfo.image75 }}" 
+      srcset="{{albumInfo.image200}} 1000w, {{albumInfo.image425}} 2000w"
+        alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
 />
+<!-- <img src="{{ albumInfo.image }}" 
+              alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+/> -->
 
 <!-- 
   TODO: Use this when thunbNails are working
@@ -20,7 +25,7 @@
   <p class="year">{{ albumInfo.year }}</p>
   <p class="artist"><strong> {{ albumInfo.artist }} </strong></p>
   <p class="albumTitle">{{ albumInfo.album }}</p>
-  <p class="type"> Single </p>
+  <p class="type"> {{albumInfo.creditType}} </p>
 </div>
 
 

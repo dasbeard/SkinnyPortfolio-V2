@@ -25,8 +25,10 @@ export class RemoveAlbumComponent implements OnInit {
   ngOnInit() {
   }
 
-  delete(id: string) {
-    this.dataService.deleteAlbum(id);
+  delete(id: string, imageName) {
+    // console.log(imageName);
+    
+    this.dataService.deleteAlbum(id, imageName);
   }
 
 }

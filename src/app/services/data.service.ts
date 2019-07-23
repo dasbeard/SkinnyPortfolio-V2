@@ -11,6 +11,7 @@ import { AlbumModel } from "../models/album";
 import { LinkModel } from "../models/links";
 
 import * as firebase from "firebase";
+import { async } from '@angular/core/testing';
 // import { async } from 'q';
 
 
@@ -55,6 +56,23 @@ export class DataService {
     this.linksCollection = afs.collection<LinkModel>("links");
     this.links = this.linksCollection.valueChanges();
   }
+  
+  // TODO: Delete image when deleting album
+    // firebase.storage().ref(`ImageName`).delete()  // Remove Image based on name
+
+  deleteAlbum(albumID:string, imageName: string) {
+    // console.log(albumID);
+    // console.log(imageName);
+    
+    this.storage.storage.ref(`Albums/${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@75_${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@200_${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@425_${imageName}`).delete();
+
+    this.singleAlbum = this.afs.doc(`albums/${albumID}`);
+    this.singleAlbum.delete();
+  
+  }
 
   uploadAlbum(data) {
     const file = data.image;
@@ -78,6 +96,7 @@ export class DataService {
       .snapshotChanges()
       .pipe(
         finalize( async () => {
+          data.imageName = fileName;
           let newAlbum = await this.getImageURLs( data, fileName);
           this.albumCollection.add(newAlbum);
         })
@@ -95,35 +114,38 @@ export class DataService {
 
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
 
-
-
     albumData.image75 = await this.getThumbs( image75 );
     albumData.image200 = await this.getThumbs( image200 );
     albumData.image425 = await this.getThumbs( image425 );
+    
     return albumData;
+
     
   }
 
 
-    async getThumbs(fileName) {
-      const retries = 10;
-      let newURL;
-      // let error;
-      let i;
+  async getThumbs(fileName) {
+    const retries = 10;
+    let newURL;
+    // let error;
+    let i;
 
-      for (i = 0; i < retries; ++i) {
-        try {
-          newURL = await firebase.storage().ref(fileName).getDownloadURL();
-          break;
-        } catch(err) {
-          // console.log(err);
-          // error = err;
-        }
+    for (i = 0; i < retries; ++i) {
+      // console.log('-----');
+      try {
+        newURL = await firebase.storage().ref(fileName).getDownloadURL();
+        break;
+      } catch(err) {
+        // console.log(err);
+        // error = err;
       }
-      console.log(i);
-      // console.log(error);
-      return newURL
     }
+      console.log(i);
+    // console.log(error);
+    return newURL
+  
+
+  }
 
 
   getAllAlbums() {
@@ -140,14 +162,6 @@ export class DataService {
     return this.allAlbums;
   }
 
-
-  // TODO: Delete image when deleting album
-    // firebase.storage().ref(`ImageName`).delete()  // Remove Image based on name
-
-  deleteAlbum(albumID:string) {
-    this.singleAlbum = this.afs.doc(`albums/${albumID}`);
-    this.singleAlbum.delete();
-  }
 
   deleteLink(linkID: string) {
     this.singleLink = this.afs.doc(`links/${linkID}`);

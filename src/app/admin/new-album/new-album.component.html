@@ -11,7 +11,7 @@
     (ngSubmit)="onSubmit(newAlbum, formDirective)"
     >
 
-    <div class="input">
+    <div class="left">
       <mat-form-field>
         <input
           autofocus
@@ -39,8 +39,6 @@
           placeholder="Year Released"
           formControlName="year"
           required
-          maxlength="4"
-          minlength="4"
         />
       </mat-form-field>
       <mat-form-field>
@@ -77,38 +75,43 @@
         </mat-form-field>
         <button 
           mat-mini-fab 
-          color="primary"
-          class="removeCredit"
           type="button" 
+          class="removeCredit"
+          color="primary"
           title="Remove Credit"
           (click)="removeCredit(i)"
           >
-          <mat-icon>
-            remove
-          </mat-icon>
-        </button>
-      </div>
-
-      <button mat-raised-button 
-        type="button" 
-        class="addCreditBtn" 
-        title="Add Another Credit"
-        (click)="addCredit()">
           <mat-icon
-          aria-label="Add Another Credit"
-          >add
+          aria-label="Remove Credit">
+          remove
         </mat-icon>
       </button>
     </div>
+    
+    <button mat-raised-button 
+      mat-mini-fab 
+      type="button" 
+      class="addCreditBtn" 
+      color="primary"
+      title="Add Another Credit"
+      (click)="addCredit()">
+        <mat-icon
+        aria-label="Add Another Credit"
+        >add
+      </mat-icon>
+      <!-- Add Another Credit -->
 
-    <div class="imageUpload">
+    </button>
+    </div>
+
+    <div class="right">
       <img
         *ngIf="!reader"
-        class="image"
+        class="albumImage"
         #albumCover
-        src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2FAddImageHere.png?alt=media&token=c478db56-88a4-4f91-a54e-3ece8a9bb338"
-      />
-      <img *ngIf="reader" class="image" #albumCover src="#" />
+        src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%40200_AddImageHere.png?alt=media&token=445d2b01-c8bb-4825-a154-2b48e8df8937"
+        />
+      <img *ngIf="reader" class="albumImage" #albumCover src="#" />
 
       <input
         class="file"
@@ -127,18 +130,50 @@
       >
         Choose File
       </button>
+
+
+      <mat-radio-group
+        aria-label="Select Credit Type"
+        class="creditType"
+        formControlName="creditType"
+        (change)="showOtherCreditType($event)"
+
+        >
+        <mat-radio-button color="primary" value="Single">Single</mat-radio-button>
+        <mat-radio-button color="primary" value="Album">Album</mat-radio-button>
+        <mat-radio-button color="primary" value="Other">Other</mat-radio-button>
+
+      </mat-radio-group>
+      
+      <mat-form-field *ngIf="otherCreditType">
+          <input
+          matInput
+          class="otherType"
+          placeholder="Other"
+          [(ngModel)] = "otherType"
+          [ngModelOptions]="{standalone: true}"
+          required
+          />
+        </mat-form-field>
+
+
+
+
     </div>
 
     <button
       mat-raised-button
-      class="btn"
+      class="submitBtn"
       type="submit"
       [disabled]="!newAlbum.valid"
       >
       Submit
     </button>
   </form>
-  
+
+
+
+
     <!-- <ng-container *ngIf="(uploadPercent | async); let uploadPercent">
       <mat-progress-bar
         mode="determinate"

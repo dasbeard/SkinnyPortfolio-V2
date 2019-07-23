@@ -4,7 +4,7 @@ import {
   FormBuilder,
   Validators,
   FormGroupDirective,
-  FormArray
+  FormArray,
  } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
@@ -28,6 +28,9 @@ export class NewAlbumComponent implements OnInit {
   uploadPercent: Observable<number>;
 
   newAlbum: FormGroup;
+  creditType: string;
+  otherCreditType:boolean = false;
+  otherType:string = '';
 
   get moreCredits() {
     return this.newAlbum.get("moreCredits") as FormArray;
@@ -67,6 +70,7 @@ export class NewAlbumComponent implements OnInit {
       credits: ["", Validators.required],
       spotify: ["", Validators.required],
       image: ["", Validators.required],
+      creditType: ["", Validators.required],
       moreCredits: this.fb.array([])
     })
   }
@@ -81,8 +85,23 @@ export class NewAlbumComponent implements OnInit {
 
   }
 
+  showOtherCreditType(event){
+    
+    if(event.value === 'Other'){  
+      this.otherCreditType = true;
+    } else {
+      this.otherCreditType = false;
+    }
+
+  }
+
   onSubmit(fromData, formDirective: FormGroupDirective): void {
     this.showProgressBar = true;
+
+    let determineCreditType = this.newAlbum.value.creditType;
+    if(determineCreditType === 'Other'){
+      determineCreditType = this.otherType;
+    }
 
     let uploadAlbum = {
       artist: this.newAlbum.value.artist,
@@ -90,9 +109,11 @@ export class NewAlbumComponent implements OnInit {
       year: this.newAlbum.value.year,
       spotify: this.newAlbum.value.spotify,
       image: this.selectedFile,
+      creditType: determineCreditType,
       credits: []
     };
 
+    
     let tempCredits = [this.newAlbum.value.credits];
     let tempCredits2 = this.validateLastCredit(this.newAlbum.value.moreCredits);
 
@@ -101,6 +122,8 @@ export class NewAlbumComponent implements OnInit {
     } else {
       uploadAlbum.credits = tempCredits;
     }
+
+    // console.log(uploadAlbum);
 
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {
@@ -112,18 +135,15 @@ export class NewAlbumComponent implements OnInit {
     if (data === 100) {
       setTimeout(() => {
         this.openSnackBar();
-      }, 900);
+      }, 500);
     
       }
     });
-    
-    // let uploadComplete = this.dataService.uploadComplete;
-    // console.log(uploadComplete);
-    
 
     this.removeAllCredits(tempCredits2);
     formDirective.resetForm();
     this.reader = false;
+
   }
 
   removeAllCredits(creditsArray) {
