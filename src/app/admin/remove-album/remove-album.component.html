@@ -1,8 +1,122 @@
-<div class="container">
-    <!-- <h1>
-      Delete Album
-      <hr />
-    </h1> -->
+<div class="container" *ngIf="allAlbums?.length > 0; else noAlbums">
+    <mat-accordion class="" >
+      <mat-expansion-panel  *ngFor="let album of allAlbums" #mep="matExpansionPanel" hideToggle>
+
+        
+
+        <mat-expansion-panel-header>
+          <!-- <img [src]=" image.thumb | async ">   -->
+          
+          <mat-panel-title class="artistName">
+              {{ album.artist }}
+            </mat-panel-title>
+            <mat-panel-description class="artistAlbum">
+              {{ album.album }}
+            </mat-panel-description>
+            <mat-icon class="editIcon">edit</mat-icon>
+          </mat-expansion-panel-header>
+
+
+
+
+        <mat-form-field class="artistAlbum">
+          <input 
+            matInput            
+            placeholder="Artist"
+            name="artist"
+            required
+            [(ngModel)]="album.artist"
+          >
+        </mat-form-field>
+        
+        <mat-form-field class="albumAlbum">
+          <input
+          matInput          
+          placeholder="Album"
+          name="album"
+          [(ngModel)]="album.album"
+          required
+          />
+        </mat-form-field> 
+        
+        <mat-form-field class="albumRelease">
+          <input
+          matInput
+          placeholder="Release Date"
+          name="releaseDate"
+          [(ngModel)]="album.releaseDate"
+          required
+          type="date"
+          />
+        </mat-form-field> 
+        
+        <mat-form-field class="albumURL">
+          <input
+          matInput
+          placeholder="Spotify URL"
+          name="spotify"
+          [(ngModel)]="album.spotify"
+          required
+          type="url"
+          />
+        </mat-form-field> 
+    
+  
+        <!-- <div class="buttons">
+  
+          <button 
+          mat-button
+          color="primary"
+          (click)="updatealbum(album)"  
+          (click)="mep.expanded = false;" 
+          class="updatealbumBtn"
+          >
+          <mat-icon
+          
+              aria-label="Update album"
+            >
+                update
+            </mat-icon>
+          </button>
+          <button 
+          mat-button
+          color="warn"
+          (click)="deletealbum(album.id)" 
+          class="deleteBtn"
+          >
+          <mat-icon
+          
+                  aria-label="Remove album">
+            remove
+          </mat-icon>
+        </button>
+      </div> -->
+  
+  
+      </mat-expansion-panel>
+  
+    </mat-accordion>
+  
+  
+  </div>
+    
+  
+  <ng-template #noAlbums>
+    <h3>
+      There are no Albums to delete
+    </h3>
+  </ng-template>
+  
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
     <div class="mat-elevation-z8" >
       <table mat-table [dataSource]="allAlbums">
         <ng-container matColumnDef="cover">
@@ -41,4 +155,4 @@
       </table>
     </div>
   </div>
-  
+   -->

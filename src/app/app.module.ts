@@ -23,6 +23,8 @@ import {
   MatTabsModule,
   MatExpansionModule,
   MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from "@angular/material";
 
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -96,6 +98,8 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
     MatTabsModule,
     MatExpansionModule,
     MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     LayoutModule,
     ReactiveFormsModule,
     FormsModule

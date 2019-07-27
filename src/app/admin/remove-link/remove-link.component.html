@@ -1,10 +1,12 @@
 <div class="container" *ngIf="allLinks?.length > 0; else noLinks">
   <mat-accordion class="" >
-    <mat-expansion-panel  *ngFor="let link of allLinks" #mep="matExpansionPanel">
+    <mat-expansion-panel  *ngFor="let link of allLinks" #mep="matExpansionPanel" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ link.title }}
         </mat-panel-title>
+        <mat-icon class="editIcon">edit</mat-icon>
+
 
       </mat-expansion-panel-header>
       <mat-form-field class="linkTitle">
@@ -43,28 +45,29 @@
       <div class="buttons">
 
         <button 
-        mat-button
-        color="primary"
-        (click)="updateLink(link)"  
-        (click)="mep.expanded = false;" 
-        class="updateLinkBtn"
+          mat-button
+          color="primary"
+          (click)="updateLink(link)"  
+          (click)="mep.expanded = false;" 
+          class="updateLinkBtn"
         >
-        <mat-icon
-        
+          <mat-icon
             aria-label="Update Link"
+            title="Update Link"
           >
-              update
+            update
           </mat-icon>
         </button>
         <button 
-        mat-button
-        color="warn"
-        (click)="deleteLink(link.id)" 
-        class="deleteBtn"
+          mat-button
+          color="warn"
+          (click)="deleteLink(link.id)" 
+          class="deleteBtn"
         >
         <mat-icon
-        
-                aria-label="Remove Link">
+          aria-label="Remove Link"
+          title="Delete Link"
+        >
           remove
         </mat-icon>
       </button>

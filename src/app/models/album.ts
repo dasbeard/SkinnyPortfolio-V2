@@ -7,10 +7,11 @@ export class AlbumModel {
     image425?: string;
     image200?: string;
     image75?: string;
-    year?: number;
+    releaseDate?: string;
     spotify?: string;
     credits?: [Credits];
     creditType?: string;
+    thumb?: string;
 
   }
   

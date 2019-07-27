@@ -66,7 +66,7 @@ export class NewAlbumComponent implements OnInit {
     this.newAlbum = this.fb.group({
       artist: ["", Validators.required],
       album: ["", Validators.required],
-      year: ["", Validators.required],
+      releaseDate: ["", Validators.required],
       credits: ["", Validators.required],
       spotify: ["", Validators.required],
       image: ["", Validators.required],
@@ -106,7 +106,7 @@ export class NewAlbumComponent implements OnInit {
     let uploadAlbum = {
       artist: this.newAlbum.value.artist,
       album: this.newAlbum.value.album,
-      year: this.newAlbum.value.year,
+      releaseDate: this.newAlbum.value.releaseDate,
       spotify: this.newAlbum.value.spotify,
       image: this.selectedFile,
       creditType: determineCreditType,
@@ -123,7 +123,7 @@ export class NewAlbumComponent implements OnInit {
       uploadAlbum.credits = tempCredits;
     }
 
-    // console.log(uploadAlbum);
+    console.log(uploadAlbum);
 
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {

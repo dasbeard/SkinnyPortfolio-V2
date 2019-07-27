@@ -74,35 +74,38 @@ export class DataService {
   }
 
   uploadAlbum(data) {
-    const file = data.image;
-    const date = new Date().toISOString();
-
-    var [fname, extension] = file.name.split('.')
-    .reduce((acc, val, i, arr) => (i == arr.length - 1) 
-        ? [acc[0].substring(1), val] 
-        : [[acc[0], val].join('.')], []);
-
-    // console.log(data.image);
- 
-    const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
-    const filePath = `Albums/${fileName}`; 
-    const task = this.storage.upload(filePath, file);
+    console.log(data);
     
-    data.imageName = fileName;
-    // Observe percent change
-    this.uploadPercent = task.percentageChanges();
+   
+    // const file = data.image;
+    // const date = new Date().toISOString();
 
-    task 
-      .snapshotChanges()
-      .pipe(
-        finalize( async () => {
+    // var [fname, extension] = file.name.split('.')
+    // .reduce((acc, val, i, arr) => (i == arr.length - 1) 
+    //     ? [acc[0].substring(1), val] 
+    //     : [[acc[0], val].join('.')], []);
+
+    // // console.log(data.image);
+ 
+    // const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
+    // const filePath = `Albums/${fileName}`; 
+    // const task = this.storage.upload(filePath, file);
+    
+    // data.imageName = fileName;
+    // // Observe percent change
+    // this.uploadPercent = task.percentageChanges();
+
+    // task 
+    //   .snapshotChanges()
+    //   .pipe(
+    //     finalize( async () => {
       
-          let newAlbum = await this.getImage( data, fileName);
-          this.albumCollection.add(newAlbum);
+    //       let newAlbum = await this.getImage( data, fileName);
+    //       this.albumCollection.add(newAlbum);
 
-        })
-      )
-      .subscribe();
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   async getImage(albumData, fileName) {
