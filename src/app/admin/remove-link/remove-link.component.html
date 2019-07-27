@@ -1,8 +1,5 @@
 <div class="container">
-    <!-- <h1>
-      Delete Link
-      <hr />
-    </h1> -->
+    
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="allLinks">
         <ng-container matColumnDef="Title">
@@ -17,12 +14,12 @@
           <td class="link" mat-cell *matCellDef="let row">{{ row.url }}</td>
         </ng-container>
   
-        <ng-container matColumnDef="Description">
+        <ng-container matColumnDef="Date">
           <th class="tableHeader desc" mat-header-cell *matHeaderCellDef>
-            Description
+            Date
           </th>
           <td class="desc" mat-cell *matCellDef="let row">
-            {{ row.description }}
+            {{ row.date }}
           </td>
         </ng-container>
   

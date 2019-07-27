@@ -53,13 +53,12 @@ export class DataService {
       ref.orderBy("year", "desc")
     );
 
-    this.linksCollection = afs.collection<LinkModel>("links");
+    this.linksCollection = this.afs.collection<LinkModel>("links", ref => 
+      ref.orderBy("date", "desc")
+    );
     this.links = this.linksCollection.valueChanges();
   }
   
-  // TODO: Delete image when deleting album
-    // firebase.storage().ref(`ImageName`).delete()  // Remove Image based on name
-
   deleteAlbum(albumID:string, imageName: string) {
     // console.log(albumID);
     // console.log(imageName);
@@ -113,7 +112,6 @@ export class DataService {
     return albumData;
   }
 
-
   getPlugsImages(fileName:string) {
     console.log(fileName);
     
@@ -129,50 +127,6 @@ export class DataService {
     return images;
   }
 
-
-  // async getImageURLs( albumData, fileName ) {
-    
-  //   const originalImage = `Albums/${fileName}`;
-  //   const image75 = `Albums/thumb@75_${fileName}`;
-  //   const image200 = `Albums/thumb@200_${fileName}`;
-  //   const image425 = `Albums/thumb@425_${fileName}`;
-
-  //   albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
-
-  //   albumData.image75 = await this.getThumbs( image75 );
-  //   albumData.image200 = await this.getThumbs( image200 );
-  //   albumData.image425 = await this.getThumbs( image425 );
-    
-  //   return albumData;
-
-    
-  // }
-
-
-  // async getThumbs(fileName) {
-  //   const retries = 10;
-  //   let newURL;
-  //   // let error;
-  //   let i;
-
-  //   for (i = 0; i < retries; ++i) {
-  //     // console.log('-----');
-  //     try {
-  //       newURL = await firebase.storage().ref(fileName).getDownloadURL();
-  //       break;
-  //     } catch(err) {
-  //       // console.log(err);
-  //       // error = err;
-  //     }
-  //   }
-  //     console.log(i);
-  //   // console.log(error);
-  //   return newURL
-  
-
-  // }
-
-
   getAllAlbums() {
     this.allAlbums = this.albumCollection.snapshotChanges().pipe(
       map(action =>
@@ -186,24 +140,23 @@ export class DataService {
     return this.allAlbums;
   }
 
-
-  deleteLink(linkID: string) {
-    this.singleLink = this.afs.doc(`links/${linkID}`);
-    this.singleLink.delete();
-  }
-
   addNewLink(newLink: LinkModel) {
     if (
       newLink.url.substring(0, 7) != "http://" &&
       newLink.url.substring(0, 8) != "https://"
-    ) {
+      ) {
       newLink.url = "http://" + newLink.url;
       this.linksCollection.add(newLink);
     } else {
       this.linksCollection.add(newLink);
     }
   }
-
+  
+  deleteLink(linkID: string) {
+    this.singleLink = this.afs.doc(`links/${linkID}`);
+    this.singleLink.delete();
+  }
+  
   getAllLinks() {
     this.links = this.linksCollection.snapshotChanges().pipe(
       map(action => 

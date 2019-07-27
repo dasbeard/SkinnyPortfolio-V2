@@ -10,7 +10,8 @@ import { DataService } from 'src/app/services/data.service';
 export class RemoveLinkComponent {
 
   allLinks: LinkModel[];
-  displayedColumns: string[] = ['Title', 'Link', 'Description', 'Delete'];
+  // displayedColumns: string[] = ['Title', 'Link', 'Date', 'Delete'];
+  displayedColumns: string[] = ['Title', 'Date'];
 
   constructor( private dataService: DataService ) {
     this.dataService.getAllLinks().subscribe(links => {

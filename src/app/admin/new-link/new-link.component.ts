@@ -27,7 +27,7 @@ export class NewLinkComponent implements OnInit {
     this.newLink = this.fb.group({
       url: ["", Validators.required],
       title: ["", Validators.required],
-      description: ["", Validators.required]
+      date: ["", Validators.required]
     })
   }
 
