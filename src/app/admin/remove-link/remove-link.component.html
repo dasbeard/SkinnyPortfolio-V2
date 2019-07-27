@@ -1,42 +1,86 @@
-<div class="container">
-    
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="allLinks">
-        <ng-container matColumnDef="Title">
-          <th class="tableHeader title" mat-header-cell *matHeaderCellDef>
-            Title
-          </th>
-          <td class="title" mat-cell *matCellDef="let row">{{ row.title }}</td>
-        </ng-container>
+<div class="container" *ngIf="allLinks?.length > 0; else noLinks">
+  <mat-accordion class="" >
+    <mat-expansion-panel  *ngFor="let link of allLinks" #mep="matExpansionPanel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ link.title }}
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <mat-form-field class="linkTitle">
+        <input 
+          matInput
+          
+          placeholder="Article Title"
+          name="title"
+          required
+          [(ngModel)]="link.title"
+        >
+      </mat-form-field>
+      
+      <mat-form-field class="linkDate">
+        <input
+        matInput
+        
+        placeholder="Date"
+        name="date"
+        [(ngModel)]="link.date"
+        type="date"
+        required
+        />
+      </mat-form-field> 
   
-        <ng-container matColumnDef="Link">
-          <th class="tableHeader link" mat-header-cell *matHeaderCellDef>URL</th>
-          <td class="link" mat-cell *matCellDef="let row">{{ row.url }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="Date">
-          <th class="tableHeader desc" mat-header-cell *matHeaderCellDef>
-            Date
-          </th>
-          <td class="desc" mat-cell *matCellDef="let row">
-            {{ row.date }}
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="Delete">
-          <th class="tableHeader delete" mat-header-cell *matHeaderCellDef>
-            Delete
-          </th>
-          <td class="delete" mat-cell *matCellDef="let row">
-            <a mat-flat-button color="warn" (click)="deleteLink(row.id)"
-              >Delete</a
-            >
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+      <mat-form-field class="linkURL">
+        <input
+          matInput
+          placeholder="URL"
+          name="url"
+          [(ngModel)]="link.url"
+          required
+        />
+      </mat-form-field>
+
+      <div class="buttons">
+
+        <button 
+        mat-button
+        color="primary"
+        (click)="updateLink(link)"  
+        (click)="mep.expanded = false;" 
+        class="updateLinkBtn"
+        >
+        <mat-icon
+        
+            aria-label="Update Link"
+          >
+              update
+          </mat-icon>
+        </button>
+        <button 
+        mat-button
+        color="warn"
+        (click)="deleteLink(link.id)" 
+        class="deleteBtn"
+        >
+        <mat-icon
+        
+                aria-label="Remove Link">
+          remove
+        </mat-icon>
+      </button>
     </div>
-  </div>
+
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+
+</div>
   
+
+<ng-template #noLinks>
+  <h3>
+    There are no links to delete
+  </h3>
+</ng-template>

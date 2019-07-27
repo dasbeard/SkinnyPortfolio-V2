@@ -157,6 +157,12 @@ export class DataService {
     this.singleLink.delete();
   }
   
+  updateLink(link: LinkModel) {
+    this.singleLink = this.afs.doc(`links/${link.id}`);
+    this.singleLink.update(link);
+
+  }
+
   getAllLinks() {
     this.links = this.linksCollection.snapshotChanges().pipe(
       map(action => 
