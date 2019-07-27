@@ -4,11 +4,11 @@ export class AlbumModel {
     artist?: string;
     image?: string;
     imageName?: string;
-    // image425?: string;
-    // image200?: string;
-    // image75?: string;
+    image425?: string;
+    image200?: string;
+    image75?: string;
     year?: number;
-    spotifyLink?: string;
+    spotify?: string;
     credits?: [Credits];
     creditType?: string;
 

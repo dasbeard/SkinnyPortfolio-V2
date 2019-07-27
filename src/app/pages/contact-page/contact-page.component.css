@@ -92,7 +92,7 @@
 */
   
   /* mobile-large */
-  @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
+  /* @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
     .container {
       max-width: 90%;
       margin: 0.5em auto 0;
@@ -141,10 +141,10 @@
     .image {
       display: none;
     }
-  }
+  } */
   
   /* mobile-small-landscape */
-  @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
+  /* @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
     .container {
       max-width: 90%;
     }
@@ -157,7 +157,6 @@
     .header {
       visibility: visible;
       height: auto;
-      /* padding-top: 0.5em; */
       margin-bottom: 0;
     }
   
@@ -185,5 +184,6 @@
       height: 30px;
       width: 30px;
     }
-  }
+  } 
+  */
   

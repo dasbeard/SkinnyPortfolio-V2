@@ -47,23 +47,48 @@
     margin: 0;
   }
   
+
+
+
   .about .creditSource {
     /* outline: 1px solid blue; */
-    margin: 25px auto;
-    width: 75%;
+    display: grid;
+    grid-template-columns: [left]55% [right]45%;
+    margin: 25px auto 3em;
+    height: 35px;
+    width: 100%;
+  }
+  
+  .about .creditSource .allmusic {
+    /* outline: 1px solid green; */
+    grid-area: left;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .about .creditSource .allmusic img{
+    height: 25px;
+
+  }
+  
+  .about .creditSource .discogs {
+    /* outline: 1px solid red; */
+    grid-area: right;
+    /* margin: 0 auto; */
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .about .creditSource .discogs img {
+    height: 30px;
+
   }
 
-  .about .creditSource .spacer {
-    flex: 1 1 auto;
-  }
- 
-  .about .creditSource .allmusic {
-    height: 25px;
-  }
-  .about .creditSource .discogs {
-    height: 30px;
-  }
 
   .externalLinks {
     width: 100%;
@@ -75,9 +100,9 @@
     grid-area: press;
   }
 
-  .externalLinks .press h3{
+  .externalLinks .press h2{
     margin-top: 0;
-    margin-bottom: .5em;
+    margin-bottom: .25em;
   }
   
   .externalLinks .plugins {
@@ -88,10 +113,13 @@
   }
 
   .externalLinks .plugins img {
-    height: 50px;
+    max-height: 50px;
+    max-width: 100px;
     width: auto;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); */
   }
   
+
   .externalLinks .plugins a:nth-child(even) {
     
     margin: 1em;
@@ -101,10 +129,9 @@
 
 
   /* mobile */
-  @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
+  /* @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
     .container {
       max-width: 90%;
-      /* max-width: 900px; */
       margin: 0.5em auto 0;
       padding: 0 2em;
     }
@@ -154,10 +181,10 @@
       object-fit: cover;
       border-radius: 50%;
     }
-  }
+  } */
   
   /* mobile-small-landscape */
-  @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
+  /* @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
     .container {
       max-width: 90%;
     }
@@ -184,7 +211,6 @@
     }
   
     .externalLinks {
-      /* grid-area: rside; */
       text-align: center;
     }
   
@@ -195,5 +221,5 @@
       margin-left: calc(50% - 125px);
       margin-bottom: 1em;
     }
-  }
+  } */
   

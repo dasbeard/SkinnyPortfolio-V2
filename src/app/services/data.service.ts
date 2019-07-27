@@ -32,8 +32,8 @@ export class DataService {
 
   // For Image upload
   uploadPercent: Observable<number>;
-  // downloadURL: Observable<string>;
-  URL: string;
+  downloadURL: Observable<string>;
+  
 
   private basePath: string = "uploads";
   private uploadTask: firebase.storage.UploadTask;
@@ -86,9 +86,10 @@ export class DataService {
     // console.log(data.image);
  
     const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
-    const filePath = `Albums/${fileName}`; // Names new Image
+    const filePath = `Albums/${fileName}`; 
     const task = this.storage.upload(filePath, file);
-
+    
+    data.imageName = fileName;
     // Observe percent change
     this.uploadPercent = task.percentageChanges();
 
@@ -96,67 +97,90 @@ export class DataService {
       .snapshotChanges()
       .pipe(
         finalize( async () => {
-          data.imageName = fileName;
-          let newAlbum = await this.getImageURLs( data, fileName);
+      
+          let newAlbum = await this.getImage( data, fileName);
           this.albumCollection.add(newAlbum);
+
         })
       )
       .subscribe();
   }
 
-
-  async getImageURLs( albumData, fileName ) {
-    
+  async getImage(albumData, fileName) {
     const originalImage = `Albums/${fileName}`;
-    const image75 = `Albums/thumb@75_${fileName}`;
-    const image200 = `Albums/thumb@200_${fileName}`;
-    const image425 = `Albums/thumb@425_${fileName}`;
-
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
 
-    albumData.image75 = await this.getThumbs( image75 );
-    albumData.image200 = await this.getThumbs( image200 );
-    albumData.image425 = await this.getThumbs( image425 );
-    
     return albumData;
-
-    
   }
 
 
-  async getThumbs(fileName) {
-    const retries = 10;
-    let newURL;
-    // let error;
-    let i;
+  getPlugsImages(fileName:string) {
+    console.log(fileName);
+    
+    const ref75 = this.storage.storage.ref(`brands/thumb@75_${fileName}`);
+    let image75 = ref75.getDownloadURL();
+    const ref200 = this.storage.storage.ref(`brands/thumb@200_${fileName}`);
+    let image200 = ref200.getDownloadURL();
+    const ref425 = this.storage.storage.ref(`brands/thumb@425_${fileName}`);
+    let image425 = ref425.getDownloadURL();
+    
+    const images = {image75:image75, image200: image200, image425: image425}
+    
+    return images;
+  }
 
-    for (i = 0; i < retries; ++i) {
-      // console.log('-----');
-      try {
-        newURL = await firebase.storage().ref(fileName).getDownloadURL();
-        break;
-      } catch(err) {
-        // console.log(err);
-        // error = err;
-      }
-    }
-      console.log(i);
-    // console.log(error);
-    return newURL
+
+  // async getImageURLs( albumData, fileName ) {
+    
+  //   const originalImage = `Albums/${fileName}`;
+  //   const image75 = `Albums/thumb@75_${fileName}`;
+  //   const image200 = `Albums/thumb@200_${fileName}`;
+  //   const image425 = `Albums/thumb@425_${fileName}`;
+
+  //   albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
+
+  //   albumData.image75 = await this.getThumbs( image75 );
+  //   albumData.image200 = await this.getThumbs( image200 );
+  //   albumData.image425 = await this.getThumbs( image425 );
+    
+  //   return albumData;
+
+    
+  // }
+
+
+  // async getThumbs(fileName) {
+  //   const retries = 10;
+  //   let newURL;
+  //   // let error;
+  //   let i;
+
+  //   for (i = 0; i < retries; ++i) {
+  //     // console.log('-----');
+  //     try {
+  //       newURL = await firebase.storage().ref(fileName).getDownloadURL();
+  //       break;
+  //     } catch(err) {
+  //       // console.log(err);
+  //       // error = err;
+  //     }
+  //   }
+  //     console.log(i);
+  //   // console.log(error);
+  //   return newURL
   
 
-  }
+  // }
 
 
   getAllAlbums() {
     this.allAlbums = this.albumCollection.snapshotChanges().pipe(
       map(action =>
-        action.map(a => {
+        action.map( a => {
           const data = a.payload.doc.data() as AlbumModel;
           const id = a.payload.doc.id;
-
           return { id, ...data };
-        })
+        }),        
       )
     )
     return this.allAlbums;

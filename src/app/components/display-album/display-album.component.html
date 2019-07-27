@@ -3,33 +3,20 @@
   *ngIf="albumInfo != null"
   @fade
   title="Listen on Spotify"
->
+  (click) = "openSpotify(albumInfo.spotify)"
+  >
 
+  <img [src]=" images.image75 | async " 
+      srcset="{{images.image75 | async }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
+      alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+  />
 
-
-<img src="{{ albumInfo.image75 }}" 
-      srcset="{{albumInfo.image200}} 1000w, {{albumInfo.image425}} 2000w"
-        alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
-/>
-<!-- <img src="{{ albumInfo.image }}" 
-              alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
-/> -->
-
-<!-- 
-  TODO: Use this when thunbNails are working
-  <img src="small.jpg" srcset="medium.jpg 1000w, large.jpg 2000w" alt="yah">
- -->
-
-
-<div class="details">
-  <p class="year">{{ albumInfo.year }}</p>
-  <p class="artist"><strong> {{ albumInfo.artist }} </strong></p>
-  <p class="albumTitle">{{ albumInfo.album }}</p>
-  <p class="type"> {{albumInfo.creditType}} </p>
-</div>
-
-
-
+  <div class="details">
+    <p class="year">{{ albumInfo.year }}</p>
+    <p class="artist"><strong> {{ albumInfo.artist }} </strong></p>
+    <p class="albumTitle">{{ albumInfo.album }}</p>
+    <p class="type"> {{albumInfo.creditType}} </p>
+  </div>
 
 </div>
 

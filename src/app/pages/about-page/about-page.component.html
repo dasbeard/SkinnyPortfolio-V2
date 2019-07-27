@@ -9,7 +9,16 @@
 
       <div class="image mat-elevation-z1" [@.disabled]='animate' @slideLeft>
       
-        <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fryan-shanahan.jpg?alt=media&token=a5c27238-4470-4647-afe3-6f54093c9d59" alt="Ryan Shanahan" />
+        <img  
+          src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fthumb%40200_ryan-shanahan.jpg?alt=media&token=633d6c4c-3e45-4e9a-ab49-667485cdf19c"
+          srcset="
+            https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fthumb%4075_ryan-shanahan.jpg?alt=media&token=660581a8-76b0-4771-93a8-e9c359425b03 75w, 
+            https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fthumb%40200_ryan-shanahan.jpg?alt=media&token=633d6c4c-3e45-4e9a-ab49-667485cdf19c 200w,
+            https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fthumb%40425_ryan-shanahan.jpg?alt=media&token=170b346c-0b5c-4dd6-adfc-54166cc0c721 425w,
+            https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/portraits%2Fryan-shanahan.jpg?alt=media&token=30d4169d-4121-4e07-a110-e1d18e60358c 1600w"
+          alt="Ryan Shanahan" 
+          sizes="(max-width: 415px) 50px, (max-width: 899px) 425px,  45vw"
+        />
       
       </div>
     
@@ -28,36 +37,69 @@
         </p>
 
         <div class="creditSource">
-          <a href="https://www.allmusic.com/artist/ryan-shanahan-mn0001405577" target="_blank">
-            <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FAllmusic_logo_(shadow).svg?alt=media&token=5b8961c0-5e72-4662-9e44-de920e5c065c" alt="All Music" class="allmusic" title="Visit All Music Profile">
+          <a href="https://www.allmusic.com/artist/ryan-shanahan-mn0001405577" 
+            target="_blank"
+            class="allmusic"
+          >
+            <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FAllmusic_logo_(shadow).svg?alt=media&token=5b8961c0-5e72-4662-9e44-de920e5c065c" 
+            alt="All Music" 
+            title="Visit All Music Profile">
           </a>
-          <p class="spacer"></p>
-          <a href="https://www.discogs.com/artist/1153699-Ryan-Shanahan" target="_blank">
-            <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fdiscogs%20logo%20simplified.png?alt=media&token=6be558b2-c606-476f-aaba-3b2bfa875c02" alt="Discogs" class="discogs" title="Visit Discogs Profile">
+
+          <a href="https://www.discogs.com/artist/1153699-Ryan-Shanahan" 
+            target="_blank" 
+            class="discogs"
+          >
+            <img      
+              src=   "https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_discogs_logo.png?alt=media&token=e0fcbba5-c69a-42d0-ba0f-096aefa4a145" 
+              srcset="
+                      https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_discogs_logo.png?alt=media&token=e0fcbba5-c69a-42d0-ba0f-096aefa4a145 75w, 
+                      https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%40200_discogs_logo.png?alt=media&token=f35a82d6-1c2a-4891-a909-bf0dd6365c84 200w"
+
+              sizes="(max-width: 415px) 50px, 150px"
+              alt="Discogs" 
+              title="Visit Discogs Profile">
           </a>
+
         </div>
         
         <div class="externalLinks">
           
           <div class="press">
 
-            <h3>
+            <h2>
               Press
-            </h3>
+            </h2>
             
             <app-list-links></app-list-links>
           
           </div>
 
           <div class="plugins" [@.disabled]='animate' @textFade>
-            <a href="https://en.antelopeaudio.com/" target="_blank">
-              <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FAA_logo.png?alt=media&token=c44f5a70-543f-49a0-a746-4257023d4d35" alt="Antelope Audio">
+            <a href="https://en.antelopeaudio.com/" target="_blank" class="">
+              <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FAA_logo.png?alt=media&token=c44f5a70-543f-49a0-a746-4257023d4d35" 
+              alt="Antelope Audio">
             </a>
-            <a href="https://www.antarestech.com/" target="_blank">
-              <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FAntares.png?alt=media&token=0be81b9f-c638-4854-b524-c30e1a89ebf6" alt="Antares Audio">
+            <a href="https://www.antarestech.com/" target="_blank" class="test">
+              <img 
+                src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_Antares.png?alt=media&token=3219d82d-1484-498b-a15a-3b7663c0eda7" 
+                srcset="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_Antares.png?alt=media&token=3219d82d-1484-498b-a15a-3b7663c0eda7 75w,
+                        https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%40200_Antares.png?alt=media&token=88d67aeb-d09e-41ce-8130-fe5b77d878a0 200w"
+                sizes="(max-width: 415px) 50px, 100px"              
+                alt="Antares Audio" 
+                title="Visit Antares Tech"
+                >
+
             </a>
-            <a href="https://www.fabfilter.com" target="_blank">
-              <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2FFabFilter%20Logo.png?alt=media&token=aef9d1cf-fb9a-481b-90a7-1be1dc60522e" alt="FabFilter">
+            <a href="https://www.fabfilter.com" target="_blank" class="">
+              <img 
+              src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_FabFilter_Logo.png?alt=media&token=327e4e19-303f-40f2-ada6-217404a3b21c" 
+              srcset="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_FabFilter_Logo.png?alt=media&token=327e4e19-303f-40f2-ada6-217404a3b21c 75w,
+              https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%40200_FabFilter_Logo.png?alt=media&token=99ce6bf8-bae4-4a82-b239-1ae879fb8d71 200w"
+              sizes="(max-width: 415px) 50px, 100px"              
+              alt="Antares Audio" 
+              title="Visit FabFilter"
+              alt="FabFilter">
             </a>
           </div>
 
