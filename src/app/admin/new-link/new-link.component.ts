@@ -19,6 +19,9 @@ export class NewLinkComponent implements OnInit {
   newLink: FormGroup;
   allLinks: LinkModel[];
 
+  startDate = new Date(2000, 0, 1);
+
+
   constructor( 
     private fb: FormBuilder, 
     private dataService: DataService) { }
@@ -27,11 +30,15 @@ export class NewLinkComponent implements OnInit {
     this.newLink = this.fb.group({
       url: ["", Validators.required],
       title: ["", Validators.required],
-      date: ["", Validators.required]
+      date: [Validators.required]
     })
   }
 
   onSubmit(newLink, formDirective: FormGroupDirective): void {
+    // console.log(newLink.value.date.toISOString())
+    // console.log(newLink.value);
+    newLink.value.date = newLink.value.date.toISOString();
+
     this.dataService.addNewLink(newLink.value);
     formDirective.resetForm();
   }

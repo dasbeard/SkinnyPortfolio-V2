@@ -2,24 +2,36 @@
     <mat-accordion class="" >
       <mat-expansion-panel  *ngFor="let album of allAlbums" #mep="matExpansionPanel" hideToggle>
 
-        
-
-        <mat-expansion-panel-header>
-          <!-- <img [src]=" image.thumb | async ">   -->
+        <mat-expansion-panel-header 
+            collapsedHeight="60px" 
+            expandedHeight="60px"
+            class="panelHeader"
+            (click)="setAlbum(album)"
+        >
           
           <mat-panel-title class="artistName">
-              {{ album.artist }}
-            </mat-panel-title>
-            <mat-panel-description class="artistAlbum">
-              {{ album.album }}
-            </mat-panel-description>
-            <mat-icon class="editIcon">edit</mat-icon>
-          </mat-expansion-panel-header>
+
+            <img 
+              class="albumCover mat-elevation-z1"
+              [src]=" album.thumb "  
+              alt="{{album.artist}} {{album.album}} Cover Art"
+            >
+
+            {{ album.artist }}
+
+          </mat-panel-title>
+
+          <mat-panel-description class="artistAlbum">
+            {{ album.album }}
+          </mat-panel-description>
+
+          <mat-icon class="editIcon">edit</mat-icon>
 
 
+        </mat-expansion-panel-header>
 
-
-        <mat-form-field class="artistAlbum">
+        <div class="test">
+        <mat-form-field class="albumArtist">
           <input 
             matInput            
             placeholder="Artist"
@@ -38,19 +50,23 @@
           required
           />
         </mat-form-field> 
-        
+
         <mat-form-field class="albumRelease">
-          <input
-          matInput
-          placeholder="Release Date"
-          name="releaseDate"
-          [(ngModel)]="album.releaseDate"
-          required
-          type="date"
-          />
-        </mat-form-field> 
-        
-        <mat-form-field class="albumURL">
+          <input matInput 
+            [matDatepicker]="datePicker"
+            placeholder="Release Date" 
+            [(ngModel)]="album.releaseDate"
+            required
+            >
+          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+    
+
+        </div>
+
+
+        <mat-form-field  class="albumURL">
           <input
           matInput
           placeholder="Spotify URL"
@@ -60,37 +76,129 @@
           type="url"
           />
         </mat-form-field> 
+        
+        <br/>
+
+
+        <mat-radio-group
+          aria-label="Select Credit Type"
+          class="albumCreditType"
+          [(ngModel)] = "album.creditType"
+        >
+
+        <mat-radio-button color="primary" value="Single">Single</mat-radio-button>
+        <mat-radio-button color="primary" value="Album">Album</mat-radio-button>
+        <mat-radio-button color="primary" value="Other">Other</mat-radio-button>
+
+      </mat-radio-group>
+
+      <mat-form-field *ngIf="(album.creditType != 'Single') && (album.creditType != 'Album') ">
+        <input
+          matInput
+          class="otherType"
+          placeholder="Other"
+          [(ngModel)] = "album.creditType"
+          [ngModelOptions]="{standalone: true}"
+          required
+        />
+      </mat-form-field>
+
+
+
+
+        <br/>
+
+        <mat-form-field 
+          class="albumCredits"
+          *ngFor="let credit of album.credits; index as i"
+        >
+          <input
+            matInput
+            placeholder="Credit"
+            name="credit"
+            [(ngModel)]="album.credits[i]"
+            required
+          
+          />
+        </mat-form-field> 
+        
     
-  
-        <!-- <div class="buttons">
-  
-          <button 
-          mat-button
+
+        <!-- <div
+        formArrayName="moreCredits"
+        class="albumCredits"
+        *ngFor="let credit of albumToEdit.credits; index as i"
+        >
+        *ngFor="let credit of moreCredits.controls; let i = index"
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Credit"
+          name="credit"
+          [(ngModel)]="albumToEdit.credits[i]"
+          required
+          
+          />
+        </mat-form-field> 
+        <button 
+          mat-mini-fab 
+          type="button" 
+          class="removeCredit"
           color="primary"
-          (click)="updatealbum(album)"  
-          (click)="mep.expanded = false;" 
-          class="updatealbumBtn"
-          >
-          <mat-icon
-          
-              aria-label="Update album"
-            >
-                update
-            </mat-icon>
-          </button>
-          <button 
-          mat-button
-          color="warn"
-          (click)="deletealbum(album.id)" 
-          class="deleteBtn"
-          >
-          <mat-icon
-          
-                  aria-label="Remove album">
+          title="Remove Credit"
+          (click)="removeCredit(i)"
+        >
+          <mat-icon aria-label="Remove Credit">
             remove
           </mat-icon>
         </button>
-      </div> -->
+      </div>
+    
+      <button mat-raised-button 
+        mat-mini-fab 
+        type="button" 
+        class="addCreditBtn" 
+        color="primary"
+        title="Add Another Credit"
+        (click)="addCredit()">
+          <mat-icon aria-label="Add Another Credit">add</mat-icon>
+      </button>  -->
+   
+
+
+
+
+
+
+
+  
+        <div class="buttons">
+  
+          <button 
+            mat-button
+            color="primary"
+            (click)="updateAlbum(album)"  
+            (click)="mep.expanded = false;" 
+            class="updateBtn mat-elevation-z1"
+            title="Update Album"
+          >
+            <mat-icon aria-label="Update album">
+                update
+            </mat-icon>
+          </button>
+
+          <button 
+            mat-button
+            color="warn"
+            (click)="deleteAlbum(album.id, album.imageName)" 
+            class="deleteBtn mat-elevation-z1"
+            title="Delete Album"
+          >
+          <mat-icon aria-label="Remove album">
+            remove
+          </mat-icon>
+        </button>
+      </div>
   
   
       </mat-expansion-panel>
@@ -103,56 +211,7 @@
   
   <ng-template #noAlbums>
     <h3>
-      There are no Albums to delete
+      There are no albums to delete
     </h3>
   </ng-template>
   
-
-
-
-
-
-
-
-
-
-<!-- <div class="container">
-    <div class="mat-elevation-z8" >
-      <table mat-table [dataSource]="allAlbums">
-        <ng-container matColumnDef="cover">
-          <th mat-header-cell *matHeaderCellDef>Artwork</th>
-          <td mat-cell *matCellDef="let row">
-            <img src="{{ row.image }}" alt="" />
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="artist">
-          <th mat-header-cell *matHeaderCellDef>Artist</th>
-          <td mat-cell *matCellDef="let row">{{ row.artist }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="album">
-          <th mat-header-cell *matHeaderCellDef>Album</th>
-          <td mat-cell *matCellDef="let row">{{ row.album }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="year">
-          <th mat-header-cell *matHeaderCellDef>Release Year</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.year }}
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="delete">
-          <th class="delete" mat-header-cell *matHeaderCellDef>Delete</th>
-          <td class="delete" mat-cell *matCellDef="let row">
-            <a mat-flat-button color="warn" (click)="delete(row.id, row.imageName)">Delete</a>
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
-  </div>
-   -->

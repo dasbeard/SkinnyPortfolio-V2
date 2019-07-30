@@ -12,7 +12,7 @@ export class RemoveLinkComponent {
   allLinks: LinkModel[];
   
   constructor( private dataService: DataService ) {
-    this.dataService.getAllLinks().subscribe(links => {
+    this.dataService.getAllLinks().subscribe(links => {      
       this.allLinks = links;
     })
    }
@@ -23,6 +23,8 @@ export class RemoveLinkComponent {
   }
 
   updateLink(link){
+    console.log(link.date);
+    link.date = link.date.toISOString();
     this.dataService.updateLink(link);
   }
 

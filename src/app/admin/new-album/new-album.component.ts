@@ -27,10 +27,11 @@ export class NewAlbumComponent implements OnInit {
   showProgressBar: boolean = false;
   uploadPercent: Observable<number>;
 
-  newAlbum: FormGroup;
   creditType: string;
   otherCreditType:boolean = false;
   otherType:string = '';
+  
+  newAlbum: FormGroup;
 
   get moreCredits() {
     return this.newAlbum.get("moreCredits") as FormArray;
@@ -96,12 +97,16 @@ export class NewAlbumComponent implements OnInit {
   }
 
   onSubmit(fromData, formDirective: FormGroupDirective): void {
+
     this.showProgressBar = true;
 
     let determineCreditType = this.newAlbum.value.creditType;
     if(determineCreditType === 'Other'){
       determineCreditType = this.otherType;
     }
+
+    this.newAlbum.value.releaseDate = this.newAlbum.value.releaseDate.toISOString();
+
 
     let uploadAlbum = {
       artist: this.newAlbum.value.artist,

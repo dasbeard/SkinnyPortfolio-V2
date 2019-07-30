@@ -4,6 +4,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ link.title }}
+
         </mat-panel-title>
         <mat-icon class="editIcon">edit</mat-icon>
 
@@ -19,18 +20,31 @@
           [(ngModel)]="link.title"
         >
       </mat-form-field>
-      
-      <mat-form-field class="linkDate">
+                  
+
+
+      <mat-form-field>
+        <input matInput 
+          [matDatepicker]="datePicker"
+          placeholder="Article Date" 
+          [(ngModel)]="link.date"
+          >
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+
+
+      <!-- <mat-form-field class="linkDate">
         <input
         matInput
-        
         placeholder="Date"
         name="date"
         [(ngModel)]="link.date"
         type="date"
         required
         />
-      </mat-form-field> 
+      </mat-form-field>          -->
   
       <mat-form-field class="linkURL">
         <input
@@ -49,11 +63,11 @@
           color="primary"
           (click)="updateLink(link)"  
           (click)="mep.expanded = false;" 
-          class="updateLinkBtn"
+          class="updateBtn mat-elevation-z1"
+          title="Update Link"
         >
           <mat-icon
             aria-label="Update Link"
-            title="Update Link"
           >
             update
           </mat-icon>
@@ -62,11 +76,11 @@
           mat-button
           color="warn"
           (click)="deleteLink(link.id)" 
-          class="deleteBtn"
+          class="deleteBtn mat-elevation-z1"
+          title="Delete Link"
         >
         <mat-icon
-          aria-label="Remove Link"
-          title="Delete Link"
+          aria-label="Delete Link"
         >
           remove
         </mat-icon>

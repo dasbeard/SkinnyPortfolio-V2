@@ -50,7 +50,7 @@ export class DataService {
     private storage: AngularFireStorage
   ) { 
     this.albumCollection = this.afs.collection<AlbumModel>("albums", ref =>
-      ref.orderBy("year", "desc")
+      ref.orderBy("releaseDate", "desc")
     );
 
     this.linksCollection = this.afs.collection<LinkModel>("links", ref => 
@@ -74,38 +74,37 @@ export class DataService {
   }
 
   uploadAlbum(data) {
-    console.log(data);
-    
+    // console.log(data);
    
-    // const file = data.image;
-    // const date = new Date().toISOString();
+    const file = data.image;
+    const date = data.releaseDate;
 
-    // var [fname, extension] = file.name.split('.')
-    // .reduce((acc, val, i, arr) => (i == arr.length - 1) 
-    //     ? [acc[0].substring(1), val] 
-    //     : [[acc[0], val].join('.')], []);
+    var [fname, extension] = file.name.split('.')
+    .reduce((acc, val, i, arr) => (i == arr.length - 1) 
+        ? [acc[0].substring(1), val] 
+        : [[acc[0], val].join('.')], []);
 
-    // // console.log(data.image);
+    // console.log(data.image);
  
-    // const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
-    // const filePath = `Albums/${fileName}`; 
-    // const task = this.storage.upload(filePath, file);
+    const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
+    const filePath = `Albums/${fileName}`; 
+    const task = this.storage.upload(filePath, file);
     
-    // data.imageName = fileName;
-    // // Observe percent change
-    // this.uploadPercent = task.percentageChanges();
+    data.imageName = fileName;
+    // Observe percent change
+    this.uploadPercent = task.percentageChanges();
 
-    // task 
-    //   .snapshotChanges()
-    //   .pipe(
-    //     finalize( async () => {
+    task 
+      .snapshotChanges()
+      .pipe(
+        finalize( async () => {
       
-    //       let newAlbum = await this.getImage( data, fileName);
-    //       this.albumCollection.add(newAlbum);
+          let newAlbum = await this.getImage( data, fileName);
+          this.albumCollection.add(newAlbum);
 
-    //     })
-    //   )
-    //   .subscribe();
+        })
+      )
+      .subscribe();
   }
 
   async getImage(albumData, fileName) {
@@ -132,16 +131,28 @@ export class DataService {
 
   getAllAlbums() {
     this.allAlbums = this.albumCollection.snapshotChanges().pipe(
-      map(action =>
-        action.map( a => {
+      map(action => 
+        action.map(a => {
           const data = a.payload.doc.data() as AlbumModel;
           const id = a.payload.doc.id;
-          return { id, ...data };
-        }),        
+          return {id, ...data}
+        })
       )
     )
     return this.allAlbums;
   }
+
+  updateAlbum(album) {
+    if ( Object.prototype.toString.call(album.releaseDate) === "[object Date]" ) {
+      album.releaseDate = album.releaseDate.toISOString();
+    }
+
+    this.singleAlbum = this.afs.doc(`albums/${album.id}`);
+    this.singleAlbum.update(album);
+  }
+
+
+  //  -=-=-=-=-=-=-= Links -=-=-=-=-=-=-=
 
   addNewLink(newLink: LinkModel) {
     if (
@@ -163,7 +174,6 @@ export class DataService {
   updateLink(link: LinkModel) {
     this.singleLink = this.afs.doc(`links/${link.id}`);
     this.singleLink.update(link);
-
   }
 
   getAllLinks() {

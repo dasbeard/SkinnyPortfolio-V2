@@ -14,8 +14,8 @@
     <div class="left">
       <mat-form-field>
         <input
-          autofocus
           matInput
+          autofocus
           class="artist"
           placeholder="Artist"
           formControlName="artist"
@@ -31,23 +31,33 @@
           required
         />
       </mat-form-field>
+
+
       <mat-form-field>
-        <input
+        <input 
           matInput
+          tabindex="-1"
           class="year"
-          type="number"
-          placeholder="Year Released"
+          [matDatepicker]="picker" 
+          placeholder="Release Date"
           formControlName="releaseDate"
-          type="date"
           required
-        />
+        >
+        <mat-datepicker-toggle 
+          matSuffix 
+          [for]="picker" 
+          >
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker startView="multi-year" ></mat-datepicker>
       </mat-form-field>
+
       <mat-form-field>
         <input
           matInput
           class="spotify"
           placeholder="Spotify Link"
           formControlName="spotify"
+          type="url"
           required
         />
       </mat-form-field>
@@ -58,21 +68,21 @@
           placeholder="Credits"
           formControlName="credits"
           required
-          />
-        </mat-form-field>
+        />
+      </mat-form-field>
         
-        <div
+      <div
         class="moreCredits"
         formArrayName="moreCredits"
         *ngFor="let credit of moreCredits.controls; let i = index"
-        >
+      >
         <mat-form-field class="newCredits">
           <input
             matInput
+            autofocus
             placeholder="Credits"
             [formControlName]="i"
-
-          />
+        />
         </mat-form-field>
         <button 
           mat-mini-fab 
@@ -81,32 +91,27 @@
           color="primary"
           title="Remove Credit"
           (click)="removeCredit(i)"
-          >
-          <mat-icon
-          aria-label="Remove Credit">
-          remove
-        </mat-icon>
-      </button>
-    </div>
+        >
+          <mat-icon aria-label="Remove Credit">
+            remove
+          </mat-icon>
+        </button>
+      </div>
     
-    <button mat-raised-button 
-      mat-mini-fab 
-      type="button" 
-      class="addCreditBtn" 
-      color="primary"
-      title="Add Another Credit"
-      (click)="addCredit()">
-        <mat-icon
-        aria-label="Add Another Credit"
-        >add
-      </mat-icon>
-      <!-- Add Another Credit -->
-
-    </button>
+      <button mat-raised-button 
+        mat-mini-fab 
+        type="button" 
+        class="addCreditBtn" 
+        color="primary"
+        title="Add Another Credit"
+        (click)="addCredit()">
+          <mat-icon aria-label="Add Another Credit">add</mat-icon>
+      </button>
     </div>
 
     <div class="right">
       <img
+        tabindex="-1"
         *ngIf="!reader"
         class="albumImage"
         #albumCover
@@ -115,6 +120,7 @@
       <img *ngIf="reader" class="albumImage" #albumCover src="#" />
 
       <input
+        tabindex="-1"
         class="file"
         type="file"
         style="display: none"
@@ -134,11 +140,9 @@
 
 
       <mat-radio-group
-        aria-label="Select Credit Type"
         class="creditType"
         formControlName="creditType"
         (change)="showOtherCreditType($event)"
-
         >
         <mat-radio-button color="primary" value="Single">Single</mat-radio-button>
         <mat-radio-button color="primary" value="Album">Album</mat-radio-button>
@@ -149,6 +153,7 @@
       <mat-form-field *ngIf="otherCreditType">
           <input
           matInput
+          autofocus
           class="otherType"
           placeholder="Other"
           [(ngModel)] = "otherType"

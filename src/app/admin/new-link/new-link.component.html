@@ -8,7 +8,7 @@
   >
     <mat-form-field class="inputs">
       <input
-      autofocus
+        autofocus
         matInput
         placeholder="Article Title"
         formControlName="title"
@@ -26,15 +26,33 @@
       />
     </mat-form-field>
 
+
     <mat-form-field class="inputs">
-      <input
-        matInput
-        placeholder="Article Date"
+      <input matInput 
+        tabindex="-1"
+        [matDatepicker]="picker" 
+        placeholder="Choose a date"
         formControlName="date"
-        required
-        type="date"
-      />
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker 
+        startView="multi-year" 
+        >
+        <!-- [startAt]='startDate' -->
+      </mat-datepicker>
     </mat-form-field>
+
+
+
+    <!-- <mat-form-field class="inputs ">
+      <input 
+        matInput 
+        formControlName="date"
+        placeholder="Choose a date"
+        type="date"
+        required
+      >
+    </mat-form-field> -->
 
     <button
       mat-raised-button
