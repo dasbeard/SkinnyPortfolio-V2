@@ -67,18 +67,16 @@ export class RemoveAlbumComponent implements OnInit {
   ngOnInit() { }
 
 
-  setAlbum(album){
-    // console.log(album);
-    // this.albumToEdit = album;
-    // console.log(this.albumToEdit);
-    
-
+  addCredit(album){
+    console.log(album);
+    // album.credits.push();
+  
   }
 
-
-
   updateAlbum(album){
-    this.dataService.updateAlbum(album);
+    console.log(album);
+    
+    // this.dataService.updateAlbum(album);
   }
   
   deleteAlbum(id: string, imageName) {
