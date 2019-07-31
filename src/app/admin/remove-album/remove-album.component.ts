@@ -66,17 +66,26 @@ export class RemoveAlbumComponent implements OnInit {
 
   ngOnInit() { }
 
+  customTrackBy(index: number, obj: any): any {
+    return index;
+  }
 
   addCredit(album){
-    console.log(album);
-    // album.credits.push();
-  
+    const last = album.credits[album.credits.length -1].replace(/\s/g,'');
+    if (last === ''){
+      return
+    } else {
+      album.credits.push('');
+    }
+  }
+
+  removeCredit(album, index){
+    album.credits.splice(index, 1)
   }
 
   updateAlbum(album){
-    console.log(album);
-    
-    // this.dataService.updateAlbum(album);
+    album.credits = this.validateLastCredit(album.credits)
+    this.dataService.updateAlbum(album);
   }
   
   deleteAlbum(id: string, imageName) {
@@ -95,27 +104,18 @@ export class RemoveAlbumComponent implements OnInit {
   }
 
 
-
-
-  // getThumb(){
-  //   this.allAlbums.map( album => {
-  //     // console.log(album.artist);
-      
-  //     const ref75 = this.storage.ref(`Albums/thumb@75_${album.imageName}`);
-  //     let thumb = ref75.getDownloadURL();
-  //     // console.log(thumb);
-  //     thumb.subscribe( data => {
-  //       album.thumb = data;
-  //       // console.log(album);
-  //     })
-  //     // this.images[album.uid] = await ref75.getDownloadURL();
-      
-  //   })
-  //   console.log(this.allAlbums);
-  //   // console.log(this.images);
-  //   return this.allAlbums
-    
-  // }
+  validateLastCredit(credits) {
+    if (credits.length <1) {
+      return
+    } else {
+      let lastCreditTrim = credits[credits.length - 1].replace(/\s/g,'');
+      if (lastCreditTrim === '') {
+        credits.pop();
+        return credits;
+      }
+      return credits;
+    }
+  }
 
 }
 

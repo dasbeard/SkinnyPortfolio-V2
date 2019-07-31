@@ -1,5 +1,5 @@
 <div class="container" *ngIf="allAlbums?.length > 0; else noAlbums">
-    <mat-accordion class="" >
+    <mat-accordion class="accordian" >
       <mat-expansion-panel  *ngFor="let album of allAlbums" #mep="matExpansionPanel" hideToggle>
 
         <mat-expansion-panel-header 
@@ -29,7 +29,7 @@
 
         </mat-expansion-panel-header>
 
-        <div class="test">
+        <div class="mainInfo">
         <mat-form-field class="albumArtist">
           <input 
             matInput            
@@ -102,78 +102,54 @@
         />
       </mat-form-field>
 
-
-
-
         <br/>
+                                        
 
-        <mat-form-field 
-          class="albumCredits"
-          *ngFor="let credit of album.credits; index as i"
-        >
-          <input
-            matInput
-            placeholder="Credit"
-            name="credit"
-            [(ngModel)]="album.credits[i]"
-            required
+
+      <div class="albumCredits" >
+
+        <div class="credit" *ngFor="let credit of album.credits; index as i; trackBy:customTrackBy">
+          <mat-form-field class="creditInput">
+            <input
+              matInput
+              placeholder="Credit"
+              name="credit"
+              [(ngModel)]="album.credits[i]"
+              required
+            />
+          </mat-form-field> 
           
-          />
-        </mat-form-field> 
-        
-        <button mat-raised-button 
-          mat-mini-fab 
-          type="button" 
-          class="addCreditBtn" 
-          color="primary"
-          title="Add Another Credit"
-          (click)="addCredit(album)">
-            <mat-icon aria-label="Add Another Credit">add</mat-icon>
-        </button>  
+          <button 
+            *ngIf="album.credits.length > 1"
+            mat-icon-button 
+            class="removeCreditBtn"
+            color="warn"
+            title="Remove Credit"
+            (click)="removeCredit(album, i)"
+          >
+            <mat-icon aria-label="Remove Credit">
+              remove
+            </mat-icon>
+          </button>
+        </div>
 
-
-
-        <!-- <div
-        formArrayName="moreCredits"
-        class="albumCredits"
-        *ngFor="let credit of albumToEdit.credits; index as i"
-        >
-        *ngFor="let credit of moreCredits.controls; let i = index"
-        <mat-form-field>
-          <input
-          matInput
-          placeholder="Credit"
-          name="credit"
-          [(ngModel)]="albumToEdit.credits[i]"
-          required
-          
-          />
-        </mat-form-field> 
-        <button 
-          mat-mini-fab 
-          type="button" 
-          class="removeCredit"
-          color="primary"
-          title="Remove Credit"
-          (click)="removeCredit(i)"
-        >
-          <mat-icon aria-label="Remove Credit">
-            remove
-          </mat-icon>
-        </button>
       </div>
-    
-      <button mat-raised-button 
-        mat-mini-fab 
-        type="button" 
+      
+      
+      <!-- <br/> -->
+
+      <button  
+        mat-icon-button 
         class="addCreditBtn" 
         color="primary"
         title="Add Another Credit"
-        (click)="addCredit()">
-          <mat-icon aria-label="Add Another Credit">add</mat-icon>
+        (click)="addCredit(album)">
+        <mat-icon aria-label="Add Another Credit">
+          add
+        </mat-icon>
+        
       </button>  
-    -->
-   
+
 
 
 
@@ -182,28 +158,27 @@
 
 
   
-        <div class="buttons">
-  
-          <button 
-            mat-button
-            color="primary"
-            (click)="updateAlbum(album)"  
-            (click)="mep.expanded = false;" 
-            class="updateBtn mat-elevation-z1"
-            title="Update Album"
-          >
-            <mat-icon aria-label="Update album">
-                update
-            </mat-icon>
-          </button>
+      <div class="buttons">
+        <button 
+          mat-button
+          color="primary"
+          (click)="updateAlbum(album)"  
+          (click)="mep.expanded = false;" 
+          class="updateBtn mat-elevation-z1"
+          title="Update Album"
+        >
+          <mat-icon aria-label="Update album">
+              update
+          </mat-icon>
+        </button>
 
-          <button 
-            mat-button
-            color="warn"
-            (click)="deleteAlbum(album.id, album.imageName)" 
-            class="deleteBtn mat-elevation-z1"
-            title="Delete Album"
-          >
+        <button 
+          mat-button
+          color="warn"
+          (click)="deleteAlbum(album.id, album.imageName)" 
+          class="deleteBtn mat-elevation-z1"
+          title="Delete Album"
+        >
           <mat-icon aria-label="Remove album">
             remove
           </mat-icon>

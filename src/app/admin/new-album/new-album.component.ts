@@ -128,7 +128,7 @@ export class NewAlbumComponent implements OnInit {
       uploadAlbum.credits = tempCredits;
     }
 
-    console.log(uploadAlbum);
+    // console.log(uploadAlbum);
 
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {

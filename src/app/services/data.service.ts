@@ -91,17 +91,18 @@ export class DataService {
     const task = this.storage.upload(filePath, file);
     
     data.imageName = fileName;
-    // Observe percent change
-    this.uploadPercent = task.percentageChanges();
 
+    this.uploadPercent = task.percentageChanges();
+    
+    
     task 
-      .snapshotChanges()
-      .pipe(
+    .snapshotChanges()
+    .pipe(
         finalize( async () => {
-      
+          
           let newAlbum = await this.getImage( data, fileName);
           this.albumCollection.add(newAlbum);
-
+          
         })
       )
       .subscribe();
