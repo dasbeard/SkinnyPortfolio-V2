@@ -2,30 +2,35 @@
   class="album mat-elevation-z2"
   *ngIf="albumInfo != null"
   @fade
-  title="Listen on Spotify"
-  (click) = "openSpotify(albumInfo.spotify)"
+  
   >
-
+  
   <img [src]=" images.image75 | async " 
-      srcset="{{images.image75 | async }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
+  srcset="{{images.image75 | async }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
       alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+      class="albumCover"
   />
 
   <div class="details">
-    <p class="year">{{ albumInfo.year }}</p>
+    <p class="year">{{ albumInfo.releaseDate | date: 'yyyy'  }}</p>
     <p class="artist"><strong> {{ albumInfo.artist }} </strong></p>
     <p class="albumTitle">{{ albumInfo.album }}</p>
     <p class="type"> {{albumInfo.creditType}} </p>
+    
+    <img src="https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_Spotify_Icon_RGB_Green.png?alt=media&token=e0bfd6a3-5688-4d23-92c0-819284e7eb3e" 
+        class="spotify"
+        alt="" 
+        title="Listen to {{albumInfo.album}} on Spotify"
+        (click) = "openSpotify(albumInfo.spotify)"
+    >
+
+
+<!-- 
+  White Logo
+  https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_Spotify_Icon_RGB_White.png?alt=media&token=fdf0a93d-c0fa-42ec-bdcb-9b7612d1efe6 
+-->
+
   </div>
 
 </div>
 
-  
-
-<!-- 
-  <span>
-  
-  </span> 
-  -->
-  
-    

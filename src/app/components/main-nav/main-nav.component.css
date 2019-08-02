@@ -23,7 +23,7 @@
   .mat-toolbar.mat-primary {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 999;
   }
 
   .menuBtn {
@@ -137,7 +137,9 @@
   }
   
   
-  
+  .mobileToolbar {
+    z-index: 999;
+  }
   
   
   /* mobile */
@@ -159,19 +161,10 @@
     }
   
     .menuBtn {
-      /* color: red; */
       position: absolute;
       right: 15px;
       top: -3px;
     }
-    .mobileHeader {
-      /* display: none; */
-    }
-  
-    /* .mobileHeader::after {
-      margin-left: 5%;
-      font-size: 0.5em;
-      content: "Engineer - Mixer";
-    } */
+
   }
   

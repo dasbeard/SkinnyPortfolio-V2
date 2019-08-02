@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: 0;
 }
 
 .album img {
@@ -14,14 +15,14 @@
   opacity: 1;
 }
 
-.album:hover img{
+.album .albumCover:hover{
   filter: grayscale(75%);
 }
 
 .album .details {
   visibility: hidden;
-  background-color: rgba(66, 66, 66, .8);
   opacity: 0;
+  background-color: rgba(66, 66, 66, .8);
   position: absolute;
   top: 0;
   color: #fff;
@@ -59,47 +60,110 @@
   color: rgba(255, 255, 255, 0.75)
 }
 
+.album .details .spotify {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  z-index: 10;
+  cursor: pointer;
+  animation: spotBounce 1.5s infinite 0s ease-in-out;
+}
+
+@keyframes spotBounce{
+  50%{
+      transform: scale(1.1);
+      }
+}
+
 
 
   
   
-  /* mobile-large */
-  @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
-    .info p {
-      font-size: 0.8em;
-    }
+/* mobile-large */
+/* @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) { */
+
+  @media (max-width: 599.99px) and (orientation: portrait) {
+  .album .details p{
+    padding: 0 10px;
   }
-  
+
+  .album .details .year{
+    display: none;
+  }
+
+  .album .details .artist{
+    padding-top: 10px;
+    font-size: 1em;
+    margin-bottom: 2px;
+  }
+
+  .album .details .albumTitle{
+    font-size: 1em;
+  }
+
+  .album .details .type{
+    font-size: .75em;
+    position: absolute;
+    bottom: -15px;
+    color: rgba(255, 255, 255, 0.75)
+  }
+
+  .album .details .spotify {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+
+}
+
+@media (max-width: 959.99px) and (orientation: landscape) {
+  /* .album .details p{
+    padding: 0 10px;
+  }
+
+  .album .details .year{
+    display: none;
+  }
+
+  .album .details .artist{
+    padding-top: 10px;
+    font-size: 1em;
+    margin-bottom: 2px;
+  }
+
+  .album .details .albumTitle{
+    font-size: 1em;
+  }
+
+  .album .details .type{
+    font-size: .75em;
+    position: absolute;
+    bottom: -15px;
+    color: rgba(255, 255, 255, 0.75)
+  }
+
+  .album .details .spotify {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  } */
+
+}
+
+
+
+
   /* mobile-small-landscape */
   @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
+
+
+
   }
-  
-  /* -=-=-==-=-=-=---=-=-=-=-= */
-  
-  /* mat-card { 
-  background: linear-gradient(
-      to bottom,
-      rgba(157, 172, 185, 1) 0%,
-      rgba(67, 68, 85, 1) 100%
-      ); 
-  
-      
-      background: linear-gradient(
-        to bottom,
-        rgba(167, 183, 190, 1) 0%,
-        rgba(152, 84, 62, 1) 50%,
-        rgba(34, 34, 29, 1) 100%
-        ); 
-   } */
-  
-  /* .image {
-        margin: 0 auto;
-        max-height: 325px;
-        max-width: 325px;
-      }
-      
-      .image img {
-        max-width: 100%;
-        max-height: 100%;
-      } */
+
   

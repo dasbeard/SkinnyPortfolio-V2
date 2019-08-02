@@ -1,14 +1,16 @@
 <div class="container">
-    <!-- <app-banner class="banner" [@.disabled]="animate"></app-banner> -->
-  
-    <div class="albumContainer" *ngIf="allAlbums" >
-      <h1>
-        Discography
-        <hr />
-      </h1>
-      <div class="albums" *ngFor="let album of allAlbums">
-        <app-display-album [albumInfo]="album"></app-display-album>
-      </div>
+
+  <div class="albumContainer" *ngIf="allAlbums" >
+    <h1>
+      Discography
+      <hr class="hr" />
+    </h1>
+
+    <div class="albums" *ngFor="let album of allAlbums">
+      <app-display-album [albumInfo]="album"></app-display-album>
+
     </div>
+
   </div>
-  
+
+</div>
