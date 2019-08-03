@@ -19,6 +19,24 @@
   .sidenav .mat-toolbar {
     background: inherit;
   }
+ 
+
+  /* =-=-=-=-== */
+
+
+  .mat-toolbar{
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    height: 2em;
+    margin: 0 auto .75em;
+    text-shadow: 0 2px 2px #000;
+    padding: 0;
+    background-color: rgba(50, 50, 50, 0.9);
+  }
+
+  /* =-=-=-=-== */
+  
   
   .mat-toolbar.mat-primary {
     position: sticky;
@@ -148,6 +166,10 @@
       position: sticky;
       top: 0;
       background-color: rgba(50, 50, 50, .85);
+    }
+
+    .menuBtn {
+      top: 0;
     }
   }
   

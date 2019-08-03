@@ -1,28 +1,20 @@
 .container {
   width: 90%;
-  margin: 2em auto;
-  padding: 1em 2em 2em;
-  color: #000;
-  border-radius: 4px;
-  /* background-color: rgb(250, 250, 250); */
+  margin: 3em auto 2em;
+  padding: 0 2em;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:  "mainContent image"
+                        "externalLinks image";
 }
 
 .header {
-  /* visibility: hidden; */
   display: none;
-  height: 0;
-  text-align: center;
-  margin-bottom: 1.25em;
-  margin-top: 0;
-}
-
-.pageContainer {
-  display: grid;
-  grid-template-columns: [lSide] 1.25fr [rSide] 1fr;
 }
 
 .image {
-  grid-area: rSide;
+  grid-area: image;
   width: 90%;
   height: 100%;
   max-height: 600px;
@@ -38,10 +30,17 @@
   object-fit: cover;
 }
 
-.about {
-  grid-area: lSide;
+.mainContent {
+  grid-area: mainContent;
   max-width: 100%;
   margin-right: 0.5em;
+  /* display: grid; */
+  /* grid-template-rows: [mainContent]1fr [externalLinks]1fr; */
+
+}
+
+.about {
+  /* grid-area: mainContent; */
 }
 
 .about p {
@@ -83,6 +82,7 @@
 }
 
 .externalLinks {
+  grid-area: externalLinks;
   width: 100%;
   display: grid;
   grid-template-columns: [press]55% [plugins]45%;
@@ -119,18 +119,233 @@
 
 /* Phone Portrait */
 @media (max-width: 599.99px) and (orientation: portrait) {
-  .header{
-    visibility: visible;
+  .container{
+    max-width: 98%;
+    margin: 0.5em auto 1.5em;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 50px 190px 1.25fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:  "headerMobile"
+                          "imageMobile"
+                          "mainContentMobile"
+                          "externalLinksMobile"
   }
+    
+  .header{
+    grid-area: headerMobile;
+    display: block;
+    margin: 0.2em;
+    font-size: 2.2em;
+    text-align: center;
+  }
+
+  .header .hr {
+    margin: 10px 0;
+  }
+
+  .image {
+    grid-area: imageMobile;
+    height: 150px;
+    width: 100%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: 0;
+    border-radius: none;
+  }
+  
+  .image img {
+    height: 100%;
+    width: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: none;
+  }
+
+  .mainContent {
+    grid-area: mainContentMobile;
+    margin-right: 0;
+  }
+
+  .about p{
+    text-align: justify;
+  }
+
+  .about .creditSource {
+    display: grid;
+    grid-template-columns: [left]1fr [right]1fr;
+    height: 35px;
+    width: 100%;
+  }
+  
+  .about .creditSource .allmusic {
+    grid-area: left;
+    width: 100%;
+  }
+  
+  .about .creditSource .discogs {
+    grid-area: right;
+    width: 100%;
+  }
+
+  .externalLinks {
+    grid-area: externalLinksMobile;
+    width: 100%;
+    display: grid;
+    grid-template-columns: [press]1.5fr [plugins].5fr;
+  }
+
+  .externalLinks .plugins a:nth-child(even) {
+    margin: 1.5em;
+  }
+
 }
+
+
+
 
   /* Phone Landscape */
 @media (max-width: 959.99px) and (orientation: landscape) {
+  .container{
+    max-width: 98%;
+    margin: 0.5em auto 1.5em;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr .65fr;
+    grid-template-rows: 50px 1.25fr .5fr;
+    grid-template-areas:  "headerMobile headerMobile"
+                          "mainContentMobile imageMobile"
+                          "externalLinksMobile externalLinksMobile"
+  }  
+   
+  .header{
+    grid-area: headerMobile;
+    display: block;
+    margin: 0.2em;
+    font-size: 2.2em;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header .hr {
+    margin: 10px 0;
+  }
+
+  .image {
+    grid-area: imageMobile;
+    max-height: 300px;
+    width: 100%;
+    margin-top: 2em;
+    margin-left: 1em;    
+  }
+  
+  .image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mainContent {
+    grid-area: mainContentMobile;
+    height: 100%;
+    width: 100%;
+    margin-top: 2em;
+    margin-right: 0;
+  }
+
+  .about p{
+    text-align: justify;
+    margin-right: 1.5em;
+  }
+  
+  .externalLinks {
+    grid-area: externalLinksMobile;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: [press]1.5fr [plugins].5fr;
+  }
+  
+  .externalLinks .plugins a:nth-child(even) {
+    margin: 1.5em;
+  } 
 
 }
 
+
+
+
+
+
 /* iPad Portrait */
 @media (min-width: 600px) and (max-width: 839.99px) and (orientation: portrait) {
+
+  .container{
+    max-width: 98%;
+    margin: 0.5em auto 1.5em;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr .65fr;
+    grid-template-rows: 50px 1.25fr .5fr;
+    grid-template-areas:  "headerMobile headerMobile"
+                          "mainContentMobile imageMobile"
+                          "externalLinksMobile externalLinksMobile"
+  }  
+   
+  .header{
+    grid-area: headerMobile;
+    display: block;
+    margin: 0.2em;
+    font-size: 2.2em;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header .hr {
+    margin: 10px 0;
+  }
+
+  .image {
+    grid-area: imageMobile;
+    max-height: 300px;
+    width: 100%;
+    margin-top: 2em;
+    margin-left: 1em;    
+  }
+  
+  .image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mainContent {
+    grid-area: mainContentMobile;
+    height: 100%;
+    width: 100%;
+    margin-top: 2em;
+    margin-right: 0;
+  }
+
+  .about p{
+    text-align: justify;
+    margin-right: 1.5em;
+  }
+  
+  .externalLinks {
+    grid-area: externalLinksMobile;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: [press]1.5fr [plugins].5fr;
+  }
+  
+  .externalLinks .plugins a:nth-child(even) {
+    margin: 1.5em;
+  } 
+
+
 
 }
 
