@@ -28,7 +28,7 @@
 /* =~=~=~=~=~=~ Media Queries =~=~=~=~=~=~ */
 
 /* Phone Portrait */
-@media (max-width: 599.99px) and (orientation: portrait) {
+@media only screen and (max-width: 599.99px) and (orientation: portrait) {
   .container {
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -60,7 +60,7 @@
 }
 
 /* Phone Landscape */
-@media (max-width: 959.99px) and (orientation: landscape) {
+@media only screen and (max-width: 959.99px) and (orientation: landscape) {
   .container {
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -92,7 +92,7 @@
 }
 
 /* iPad Portrait */
-@media (min-width: 600px) and (max-width: 839.99px) and (orientation: portrait) {
+@media only screen and (min-width: 600px) and (max-width: 839.99px) and (orientation: portrait) {
   .container {
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -125,7 +125,7 @@
 
 
 /* iPad Landscape */
-@media (min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape){
+@media only screen and (min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape){
   .container {
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -134,13 +134,13 @@
     grid-template-columns: 1fr;
   }
 
-  .albumContainer h1 {
+  /* .albumContainer h1 {
     display: block;
     margin: 0.2em;
     font-size: 2.2em;
     width: 100%;
     text-align: center;
-  }
+  } */
 
   .albumContainer .hr {
     margin: 10px 0;

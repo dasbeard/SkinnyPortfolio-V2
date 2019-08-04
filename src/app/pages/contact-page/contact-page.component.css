@@ -61,7 +61,7 @@
 /* =~=~=~=~=~=~ Media Queries =~=~=~=~=~=~ */
 
 /* Phone Portrait */
-@media (max-width: 599.99px) and (orientation: portrait) {
+@media only screen and (max-width: 599.99px) and (orientation: portrait) {
   .container{
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -149,7 +149,7 @@
 
 
 /* Phone Landscape */
-@media (max-width: 959.99px) and (orientation: landscape) {
+@media only screen and (max-width: 959.99px) and (orientation: landscape) {
   .container{
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -223,9 +223,10 @@
   }
 
   .social svg {
-    width: 3em;
-    height: 3em;
+    width: 2.5em;
+    height: 2.5em;
     display: block;
+    margin-top: .5em;
   }
   
   .social .instagram a:hover {
@@ -247,132 +248,201 @@
 }
   
 
+/* iPad Portrait */
+@media only screen and (min-width: 600px) and (max-width: 839.99px) and (orientation: portrait) {
+  .container{
+    max-width: 98%;
+    margin: 0.5em auto 1.5em;
+    padding: 0;
+    display: grid;
+    grid-template-columns: .65fr 1fr;
+    grid-template-rows: 80px .8fr .2fr;
+    grid-template-areas:  "header header"
+                          "image contact"
+                          "image socialMedia";
+  }  
+  
+  .header{
+    grid-area: header;
+    display: block;
+    margin: 0.2em;
+    font-size: 2.2em;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
 
+  .header .hr {
+    margin: 10px 0;
+  }
 
-
-
-
-/*   
-  .divider{
-    margin: 1.5em 0;
+  .image {
+    grid-area: image;
+    max-height: 300px;
+    width: 100%;
+    margin-left: .5em;    
+    /* margin-top: 2em; */
   }
   
-  a:hover {
-    color: rgb(57, 108, 247);
+  .image img {
+    width: 100%;
+    height: 100%;
   }
   
-  .social .socialHeader {
-    margin-bottom: 0.5em !important;
+  .text {
+    grid-area: contact;
+    height: 100%;
+    margin: 0.5em;
+  }
+
+  .text p:nth-child(2) {
+    margin-bottom: 0.5em;
+  }
+
+  .social {
+    grid-area: socialMedia;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-direction: column; */
+    text-align: center;
+    margin-top: 2em;
   }
   
+  .social a {
+    color: #000;
+    margin-bottom: 2em;
+    text-decoration: none;
+  }
+
+  .social .instagram {
+    fill:#f56040;
+  }
+
+  .social .twitter {
+    fill: #1da0f2;
+  }
+
   .social svg {
-    fill: #fff;
-    margin: 0.5em 1em;
-    height: 45px;
-    width: 45px;
-  }
-  .social svg:hover {
-    fill: rgb(57, 108, 247);
+    width: 2.5em;
+    height: 2.5em;
+    display: block;
   }
   
-  .filter {
-    filter: drop-shadow(0 5px 2px rgba(0, 0, 0, 1));
+  .social .instagram a:hover {
+    fill:rgb(247,119,55);
   }
-*/
   
-  /* mobile-large */
-  /* @media all and (min-width: 0) and (max-width: 415px) and (orientation: portrait) {
-    .container {
-      max-width: 90%;
-      margin: 0.5em auto 0;
-      padding: 0 2em;
-    }
-    
-    .pageContainer {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      grid-template-areas: 'content';
-    }
   
-    .header {
-      visibility: visible;
-      height: auto;
-      padding-top: 0.5em;
-      margin-bottom: 0;
-    }
+  .social .twitter a:hover {
+    fill: rgb(0, 172, 237);
+  }
+
+  .social .filter {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 1));
+    width: 30%;
+    margin-left: calc(50% - 15%);
+    margin-bottom: .25em;
+  }
+
+}
+
+
+@media only screen and (min-width: 960px) and (max-width: 1279.99px) and (orientation: landscape){
+  .container{
+    max-width: 98%;
+    margin: 0.5em auto 1.5em;
+    padding: 0;
+    display: grid;
+    grid-template-columns: .65fr 1fr;
+    grid-template-rows: 80px .8fr .2fr;
+    grid-template-areas:  "header header"
+                          "image contact"
+                          "image socialMedia";
+  }  
   
-    h1 {
-      margin-bottom: 0.25em;
-    }
+  .header{
+    grid-area: header;
+    display: block;
+    margin: 0.2em;
+    font-size: 2.2em;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header .hr {
+    margin: 10px 0;
+  }
+
+  .image {
+    grid-area: image;
+    max-height: 300px;
+    width: 100%;
+    margin-left: .5em;    
+    /* margin-top: 2em; */
+  }
   
-    .text {
-      grid-area: content;
-      padding-bottom: 2em;
-    }
+  .image img {
+    width: 100%;
+    height: 100%;
+  }
   
-    .text p {
-      font-size: 1.5em;
-      margin-top: 0.5em;
-    }
+  .text {
+    grid-area: contact;
+    height: 100%;
+    margin: 0.5em;
+  }
+
+  .text p:nth-child(2) {
+    margin-bottom: 0.5em;
+  }
+
+  .social {
+    grid-area: socialMedia;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-direction: column; */
+    text-align: center;
+    margin-top: 2em;
+  }
   
-    a {
-      font-size: 1em;
-    }
+  .social a {
+    color: #000;
+    margin-bottom: 2em;
+    text-decoration: none;
+  }
+
+  .social .instagram {
+    fill:#f56040;
+  }
+
+  .social .twitter {
+    fill: #1da0f2;
+  }
+
+  .social svg {
+    width: 2.5em;
+    height: 2.5em;
+    display: block;
+  }
   
-    .social svg {
-      fill: #fff;
-      margin: 0 1em;
-      height: 30px;
-      width: 30px;
-    }
+  .social .instagram a:hover {
+    fill:rgb(247,119,55);
+  }
   
-    .image {
-      display: none;
-    }
-  } */
   
-  /* mobile-small-landscape */
-  /* @media all and (min-width: 415px) and (max-width: 899px) and (orientation: landscape) {
-    .container {
-      max-width: 90%;
-    }
-  
-    .pageContainer {
-      display: grid;
-      grid-template-columns: [lSide] 1fr [rSide] 1fr;
-    }
-  
-    .header {
-      visibility: visible;
-      height: auto;
-      margin-bottom: 0;
-    }
-  
-    .text {
-      grid-area: rSide;
-    }
-  
-    .text p {
-      font-size: 1.25em;
-      margin-right: 0.5em;
-    }
-  
-    .image {
-      grid-area: lSide;
-      height: 175px;
-      width: 175px;
-      margin-left: calc(50% - 125px);
-      margin-bottom: 1em;
-      margin-top: 1em;
-    }
-  
-    .social svg {
-      fill: #fff;
-      margin: 0 0.5em;
-      height: 30px;
-      width: 30px;
-    }
-  } 
-  */
-  
+  .social .twitter a:hover {
+    fill: rgb(0, 172, 237);
+  }
+
+  .social .filter {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 1));
+    width: 30%;
+    margin-left: calc(50% - 15%);
+    margin-bottom: .25em;
+  }
+}
+
+
