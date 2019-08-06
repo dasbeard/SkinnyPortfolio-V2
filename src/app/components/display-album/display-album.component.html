@@ -6,7 +6,7 @@ class="album mat-elevation-z2"
   
   >
   
-  <img src="{{albumInfo.image75}}"
+  <img img-cache img-cache-src="{{albumInfo.image75}}"
       srcset="{{albumInfo.image75}} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
       alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
       class="albumCover"

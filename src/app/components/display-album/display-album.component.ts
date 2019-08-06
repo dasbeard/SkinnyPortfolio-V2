@@ -22,7 +22,7 @@ export class DisplayAlbumComponent implements OnInit {
   
   // @Output() imageURLReady = new EventEmitter<boolean>();
 
-  images = { image75: null, image200: null, image425: null };
+  images = { image200: null, image425: null };
   ready:boolean = false;
 
   constructor(private dataservice: DataService, private storage: AngularFireStorage) { 
@@ -36,8 +36,8 @@ export class DisplayAlbumComponent implements OnInit {
   }
   
   getThumbs () {
-    const ref75 = this.storage.ref(`Albums/thumb@75_${this.albumInfo.imageName}`);
-    this.images.image75 = ref75.getDownloadURL();
+    // const ref75 = this.storage.ref(`Albums/thumb@75_${this.albumInfo.imageName}`);
+    // this.images.image75 = ref75.getDownloadURL();
     const ref200 = this.storage.ref(`Albums/thumb@200_${this.albumInfo.imageName}`);
     this.images.image200 = ref200.getDownloadURL();
     const ref425 = this.storage.ref(`Albums/thumb@425_${this.albumInfo.imageName}`);

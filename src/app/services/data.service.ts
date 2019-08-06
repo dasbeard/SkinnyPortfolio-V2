@@ -101,19 +101,35 @@ export class DataService {
         finalize( async () => {
           
           let newAlbum = await this.getImage( data, fileName);
-          this.albumCollection.add(newAlbum);
+          this.albumCollection.add(newAlbum);          
           
         })
       )
       .subscribe();
+
+    // addImage75(newAlbum)
+
   }
 
   async getImage(albumData, fileName) {
     const originalImage = `Albums/${fileName}`;
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
+    
+    albumData.image75 = await this.addImage75(albumData);
+    console.log(albumData);
 
     return albumData;
   }
+
+  async addImage75(album){
+    console.log(album);
+    
+    const ref75 = this.storage.ref(`Albums/thumb@75_${album.imageName}`);
+    let image75 = await ref75.getDownloadURL();
+
+    return image75;
+  }
+
 
   getPlugsImages(fileName:string) {
     console.log(fileName);
