@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { ImgCacheService } from 'ng-imgcache';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SkinnyPortfolio-V2';
+
+  constructor(imgCache: ImgCacheService) {
+    imgCache.init()
+  }
+
+
 }

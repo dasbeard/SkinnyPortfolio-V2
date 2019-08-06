@@ -27,6 +27,10 @@ export class HomePageComponent implements OnInit {
     timing:string = '.2s';
     // timing:string = '1.2s';
 
+
+    // counter:number = 0;
+    // showAlbums:boolean = null;
+
   constructor( private dataService: DataService) {
     this.dataService.getAllAlbums().subscribe(data => {
       this.allAlbums = data;
@@ -38,5 +42,19 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // displayImages($event){
+  //   console.log($event);
+  //   this.counter++;
+
+  //   if (this.counter == this.allAlbums.length){
+  //     console.log(this.counter);
+  //     this.showAlbums = true;
+  //   } else {
+  //     this.showAlbums = false;
+  //   }
+    
+  // }
+
 
 }

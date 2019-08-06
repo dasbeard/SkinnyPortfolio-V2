@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AlbumModel } from '../../models/album'
 import { fade } from 'src/app/animation';
 import { DataService } from 'src/app/services/data.service';
@@ -18,9 +18,12 @@ export interface DialogData {
 })
 export class DisplayAlbumComponent implements OnInit {
 
-  @Input() albumInfo: AlbumModel
-  images = { image75: null, image200: null, image425: null };
+  @Input() albumInfo: AlbumModel;
+  
+  // @Output() imageURLReady = new EventEmitter<boolean>();
 
+  images = { image75: null, image200: null, image425: null };
+  ready:boolean = false;
 
   constructor(private dataservice: DataService, private storage: AngularFireStorage) { 
 
@@ -39,6 +42,9 @@ export class DisplayAlbumComponent implements OnInit {
     this.images.image200 = ref200.getDownloadURL();
     const ref425 = this.storage.ref(`Albums/thumb@425_${this.albumInfo.imageName}`);
     this.images.image425 = ref425.getDownloadURL();
+    this.ready = true;
+    // this.imageURLReady.emit(true);
+
   }
 
   openSpotify(url) {

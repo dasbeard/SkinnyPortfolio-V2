@@ -5,6 +5,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { LayoutModule } from "@angular/cdk/layout";
 
+import { ImgCacheModule } from 'ng-imgcache';
+
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -102,7 +104,8 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
     MatNativeDateModule,
     LayoutModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ImgCacheModule
   ],
   providers: [],
   bootstrap: [AppComponent],

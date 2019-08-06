@@ -1,15 +1,29 @@
+<!-- *ngIf="ready" -->
 <div
-  class="album mat-elevation-z2"
-  *ngIf="albumInfo != null"
+class="album mat-elevation-z2"
+*ngIf="albumInfo != null"
   @fade
   
   >
   
+  <img src="{{albumInfo.image75}}"
+      srcset="{{albumInfo.image75}} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
+      alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+      class="albumCover"
+  />
+
+<!--   
   <img [src]=" images.image75 | async " 
   srcset="{{images.image75 | async }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
       alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
       class="albumCover"
-  />
+  /> -->
+  
+  <!-- <img *ngIf="ready" img-cache [img-cache-src]=" images.image75 | async " 
+      srcset="{{images.image75 | async }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
+      alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
+      class="albumCover"
+  /> -->
 
   <div class="details">
     <p class="year">{{ albumInfo.releaseDate | date: 'yyyy'  }}</p>
