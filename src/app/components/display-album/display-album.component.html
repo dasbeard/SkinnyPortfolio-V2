@@ -1,13 +1,12 @@
-<!-- *ngIf="ready" -->
 <div
-class="album mat-elevation-z2"
-*ngIf="albumInfo != null"
+  class="album mat-elevation-z2"
+  *ngIf="albumInfo != null"
   @fade
   
   >
   
-  <img img-cache img-cache-src="{{albumInfo.image75}}"
-      srcset="{{albumInfo.image75}} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
+  <img src="{{albumInfo.image75}}"
+      srcset="{{ albumInfo.image75 }} 75w, {{images.image200 | async }} 200w, {{images.image425 | async }} 425w"
       alt="Album Cover for {{ albumInfo.artist }} {{ albumInfo.album }}" 
       class="albumCover"
   />
@@ -37,12 +36,6 @@ class="album mat-elevation-z2"
         title="Listen to {{albumInfo.album}} on Spotify"
         (click) = "openSpotify(albumInfo.spotify)"
     >
-
-
-<!-- 
-  White Logo
-  https://firebasestorage.googleapis.com/v0/b/skinnyportfolio-2.appspot.com/o/brands%2Fthumb%4075_Spotify_Icon_RGB_White.png?alt=media&token=fdf0a93d-c0fa-42ec-bdcb-9b7612d1efe6 
--->
 
   </div>
 

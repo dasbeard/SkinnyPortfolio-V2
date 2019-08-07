@@ -77,7 +77,8 @@ export class DataService {
     // console.log(data);
    
     const file = data.image;
-    const date = data.releaseDate;
+    // const date = data.releaseDate;
+    const date = new Date().toISOString();
 
     var [fname, extension] = file.name.split('.')
     .reduce((acc, val, i, arr) => (i == arr.length - 1) 
@@ -107,66 +108,54 @@ export class DataService {
       )
       .subscribe();
 
-      setTimeout(() => {
-        console.log('test');
-        this.test(data);
-        console.log('test2');
-        
-      }, 5000);
-
-    // addImage75(newAlbum)
-
-  }
-
-  test(albumData){
-    console.log(albumData);
-
-    firebase.firestore().collection('albums').where('imageName', "==", albumData.imageName)
-      .get()
-      .then( data => {
-        data.forEach( async album => {
-          const updatedAlbum = album.data()
-
-          this.singleAlbum = this.afs.doc(`albums/${updatedAlbum.id}`);
-          let tempImage75 = await this.addImage75(updatedAlbum);
-          console.log(tempImage75);
-          
-          // updatedAlbum.image75 = await tempImage75;
-          
-
-          // this.singleAlbum.update( await updatedAlbum);
-        })
-        
-      })
+    setTimeout(() => {
+      this.addThumb75ToAlbum(data);
+    }, 1500);
 
       
-    }
-    
-    // this.afs.collection('albums', ref => ref.where('imageName', '==', albumData.imageName)).get()
-
-  test2(album) {
-    
-    let tempImage75 = this.afs.collection('albums', ref => ref.where('imageName', '==', album.imageName))
-      .snapshotChanges()
-      .pipe(
-        map(action => 
-          action.map (a => {
-            const data = a.payload.doc.data() as AlbumModel;
-            const image75 = this.storage.ref(`Albums/thumb@75_${album.imageName}`).getDownloadURL();
-            console.log(image75);
-            
-            return {image75, ...data}
-          }))
-      )
-
-    console.log(tempImage75);
-    
-    return tempImage75;
-
   }
 
 
+// -=-=-=-=-=-=-=-=-=-=--=
 
+  async addThumb75ToAlbum( albumData ) {
+    albumData.image75 = await this.getThumb75( albumData );
+    
+    this.updateAlbumWithThumb75(albumData)
+  }
+  
+  async getThumb75(albumData) {
+    let i;
+    let newURL;
+    const retries = 25;
+    const imageName = `Albums/thumb@75_${albumData.imageName}`;
+    
+    for (i = 0; i < retries; ++i) {
+
+        try {
+          newURL = await firebase.storage().ref(imageName).getDownloadURL();
+          break;
+        } catch(err) {
+          // console.log(err);
+        }
+    }
+    // console.log(i);
+    return newURL
+  }
+  
+  updateAlbumWithThumb75(albumData) {
+    firebase.firestore().collection("albums").where('imageName', '==', albumData.imageName).limit(1).get()
+    .then( data => { 
+      data.docs.forEach(doc => {
+        this.singleAlbum = this.afs.doc(`albums/${doc.id}`);
+        this.singleAlbum.update(albumData);
+        // console.log(doc.id);
+        
+      })
+    })
+  }
+// -=-=-=-=-=-=-=-=-=-=--=
+  
   async getImage(albumData, fileName) {
     const originalImage = `Albums/${fileName}`;
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
@@ -176,51 +165,28 @@ export class DataService {
     return albumData;
   }
 
-  async addImage75(album){
-    // console.log(album);
-    const retries = 10;
-    let newURL;
-    let i;
+  // async getThumbs(fileName) {
+  //   const retries = 10;
+  //   let newURL;
+  //   // let error;
+  //   let i;
 
-    for (i = 0; i< retries; i++){
-      try {
-        newURL = await this.storage.ref(`Albums/thumb@75_${album.imageName}`);
-        break;
-      } catch (err){}
-    }
-    
-    console.log(newURL, i);
-    
-    return newURL;
-  }
-
-
-
-
-
-  async getThumbs(fileName) {
-    const retries = 10;
-    let newURL;
-    // let error;
-    let i;
-
-    for (i = 0; i < retries; ++i) {
-      // console.log('-----');
-      try {
-        newURL = await firebase.storage().ref(fileName).getDownloadURL();
-        break;
-      } catch(err) {
-        // console.log(err);
-        // error = err;
-      }
-    }
-      console.log(i);
-    // console.log(error);
-    return newURL
+  //   for (i = 0; i < retries; ++i) {
+  //     // console.log('-----');
+  //     try {
+  //       newURL = await firebase.storage().ref(fileName).getDownloadURL();
+  //       break;
+  //     } catch(err) {
+  //       // console.log(err);
+  //       // error = err;
+  //     }
+  //   }
+  //     console.log(i);
+  //   // console.log(error);
+  //   return newURL
   
 
-  }
-
+  // }
 
   getPlugsImages(fileName:string) {
     console.log(fileName);
