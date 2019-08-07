@@ -50,13 +50,6 @@ export class RemoveAlbumComponent implements OnInit {
     private fb: FormBuilder) { 
     
     this.dataService.getAllAlbums().subscribe(albums => {
-      // albums.map( album => {
-      //   const ref75 = this.storage.ref(`Albums/thumb@75_${album.imageName}`);
-      //   let thumb = ref75.getDownloadURL();
-      //   thumb.subscribe( data => {
-      //     album.thumb = data;
-      //   })
-      // })
       this.allAlbums = albums
       // console.log(albums);
     })

@@ -11,8 +11,7 @@ import { ImgCacheService } from 'ng-imgcache';
 export class AppComponent {
   title = 'SkinnyPortfolio-V2';
 
-  constructor(imgCache: ImgCacheService) {
-    imgCache.init()
+  constructor() {
   }
 
 

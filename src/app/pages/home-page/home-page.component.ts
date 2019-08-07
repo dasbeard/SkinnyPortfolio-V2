@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumModel } from '../../models/album';
-import { trigger, style, state } from '@angular/animations';
-import { albumAnimationTransition, fadeIn, fade } from '../../animation';
+// import { trigger, style, state } from '@angular/animations';
+// import { albumAnimationTransition, fadeIn, fade } from '../../animation';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
