@@ -1,3 +1,11 @@
-*{
-    color: black;
+.container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: red;
+}
+
+.masonry-item { 
+    /* width: 200px;  */
+    /* background-color: red; */
+    margin-bottom: 20px;
 }

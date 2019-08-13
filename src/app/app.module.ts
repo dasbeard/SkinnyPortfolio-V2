@@ -32,8 +32,9 @@ import { AngularFireStorageModule, StorageBucket } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 
-import { Keys } from "../../keys";
+import { NgMasonryGridModule } from 'ng-masonry-grid';
 
+import { Keys } from "../../keys";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -103,10 +104,10 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    NgMasonryGridModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  // entryComponents: [AlbumDialog, uploadSnackBar]
   entryComponents: [uploadSnackBar]
 })
 export class AppModule { }
