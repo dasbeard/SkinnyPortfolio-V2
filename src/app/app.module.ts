@@ -50,7 +50,7 @@ import { DisplayAlbumComponent } from './components/display-album/display-album.
 import { BannerComponent } from './components/banner/banner.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { PhotographyPageComponent } from './pages/photography-page/photography-page.component';
+import { PhotographyPageComponent, photographyDialog } from './pages/photography-page/photography-page.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,8 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
     BannerComponent,
     MainNavComponent,
     AdminNavComponent,
-    PhotographyPageComponent
+    PhotographyPageComponent,
+    photographyDialog
   ],
   imports: [
     BrowserModule,
@@ -105,6 +106,6 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [uploadSnackBar]
+  entryComponents: [uploadSnackBar, photographyDialog]
 })
 export class AppModule { }

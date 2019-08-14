@@ -22,6 +22,7 @@ export class NewAlbumComponent implements OnInit {
   selectedFile: File = null;
   image = null;
   reader;
+  validImage: boolean = false;
 
   // Upload Progress Bar
   showProgressBar: boolean = false;
@@ -77,12 +78,19 @@ export class NewAlbumComponent implements OnInit {
   }
   
   imagePreview(event) {
-    this.selectedFile = event.target.files[0];
-    this.reader = new FileReader();
-    this.reader.onload = e => {
-      this.albumCover.nativeElement.src = e.target["result"];
-    };
-    this.reader.readAsDataURL(event.target.files[0]);
+    // Check file size
+    if(event.target.files[0].size > 150000){
+      alert('Image is too large - Must be under 150kb')
+      this.validImage = false;
+    } else {
+      this.validImage = true;
+      this.selectedFile = event.target.files[0];
+      this.reader = new FileReader();
+      this.reader.onload = e => {
+        this.albumCover.nativeElement.src = e.target["result"];
+      };
+      this.reader.readAsDataURL(event.target.files[0]);
+    }
 
   }
 
@@ -107,7 +115,6 @@ export class NewAlbumComponent implements OnInit {
 
     this.newAlbum.value.releaseDate = this.newAlbum.value.releaseDate.toISOString();
 
-
     let uploadAlbum = {
       artist: this.newAlbum.value.artist,
       album: this.newAlbum.value.album,
@@ -128,14 +135,10 @@ export class NewAlbumComponent implements OnInit {
       uploadAlbum.credits = tempCredits;
     }
 
-    // console.log(uploadAlbum);
-
     this.dataService.uploadAlbum(uploadAlbum);
     this.dataService.uploadPercent.subscribe(data => {
-    // console.log(data);
 
       this.uploadPercent = this.dataService.uploadPercent;
-      // console.log(this.uploadPercent);
 
     if (data === 100) {
       setTimeout(() => {
@@ -182,6 +185,9 @@ export class NewAlbumComponent implements OnInit {
     })
   }
 }
+
+
+// =-=-=-=-=-=--=-=-=-=-==-=-=-=-=-=-=--=-=-=-=-==-=-=-
 
 
 @Component({

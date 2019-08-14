@@ -6,3 +6,13 @@ body { margin: 0;
     font-family: 'Source Sans Pro', sans-serif !important;
 }
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+
+.photoDialog .mat-dialog-container{
+    padding: 0;
+    background-color: rgba(333, 333, 333, .75);
+}
+
+.photoDialogBackdrop {
+    background-color: rgba(1, 1, 1, .5);
+}

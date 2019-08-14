@@ -4,11 +4,10 @@
         <hr class="hr" />
       </h1>
   <div class="imageContainer" *ngFor="let item of masonryItems; let i = index">
-    <img  class="mat-elevation-z2" 
+    <img class="mat-elevation-z2 photoImage"
           src="{{item.url}}" 
-          (click)="test(i)" 
+          (click)="openDialog(item)" 
           alt=""
           >
-
   </div>
 </div>
