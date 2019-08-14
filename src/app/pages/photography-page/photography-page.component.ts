@@ -1,45 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { NgxMasonryOptions } from 'ngx-masonry';
-import { Masonry, MasonryGridItem } from 'ng-masonry-grid'; // import necessary datatypes
-
-
 @Component({
   selector: 'app-photography-page',
   templateUrl: './photography-page.component.html',
   styleUrls: ['./photography-page.component.css']
 })
 export class PhotographyPageComponent implements OnInit {
-
-  _masonry: Masonry;
-  // masonryItems: any[]; // NgMasonryGrid Grid item list
-
+  
   masonryItems = [];
 
-	public masonryOptions = {
-    transitionDuration: '0.6s',
-    itemSelector: ".grid-item",
-    gutter: 10,
-    horizontalOrder: true,
-		resize: true,
-		initLayout: true,
-		fitWidth: true,
-    columnWidth: 20,
-    // percentPosition: true,
-  
-  };
+  dummyImages = [
+    {url: 'https://picsum.photos/300/350', width:300, height:350},
+    {url: 'https://picsum.photos/300/400', width:300, height:400},
+    {url: 'https://picsum.photos/500/300', width:500, height:300},
+    {url: 'https://picsum.photos/350/275', width:350, height:275},
+    {url: 'https://picsum.photos/380/300', width:380, height:300},
+    {url: 'https://picsum.photos/250/250', width:250, height:250},
+    {url: 'https://picsum.photos/425/450', width:425, height:450},
+    {url: 'https://picsum.photos/275/350', width:275, height:350},
+    {url: 'https://picsum.photos/220/300', width:220, height:300},
+    {url: 'https://picsum.photos/400/375', width:400, height:375},
+    {url: 'https://picsum.photos/250/350', width:250, height:350},
+  ]
 
 
-  // masonryOptions = {
-  //   transitionDuration: '0.8s',
-  //   columnWidth: 20,
-  //   percentPosition: true,
-  //   gutter: 10,
-  //   isFitWidth: true
-  //   // itemSelector: '.masonry-item',
-  //   // columnWidth: 30,
-  //   // percentPosition: true
-  // };
+  testCondition:boolean = false;
+
 
   constructor() { 
     this.generateRandomImages();
@@ -47,9 +33,13 @@ export class PhotographyPageComponent implements OnInit {
 
   ngOnInit() {  }
 
-  onNgMasonryInit($event: Masonry) {
-    this._masonry = $event;
+  test(index){
+    console.log(index);
+    
+    this.testCondition = !this.testCondition; 
+    
   }
+
 
 
   generateRandomImages() {
@@ -67,8 +57,7 @@ export class PhotographyPageComponent implements OnInit {
       this.masonryItems.push(newImage);
     }
 
-    console.log(this.masonryItems);
-    
+    // console.log(this.masonryItems);
     
   }
 

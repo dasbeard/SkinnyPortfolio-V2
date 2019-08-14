@@ -32,8 +32,6 @@ import { AngularFireStorageModule, StorageBucket } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 
-import { NgMasonryGridModule } from 'ng-masonry-grid';
-
 import { Keys } from "../../keys";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -104,7 +102,6 @@ import { PhotographyPageComponent } from './pages/photography-page/photography-p
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    NgMasonryGridModule
   ],
   providers: [],
   bootstrap: [AppComponent],

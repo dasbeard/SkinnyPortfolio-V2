@@ -1,12 +1,14 @@
 <div class="container">
-  <ng-masonry-grid
-    [masonryOptions]="masonryOptions" 
-    [useImagesLoaded]="true"
-  >
-      <!-- Masonry Grid Item -->
-      <ng-masonry-grid-item *ngFor="let item of masonryItems; let i = index;"> 
-      <!-- Grid Content  -->
-    <img class="masonry-item grid-item" src="{{ item.url }}" [style.height.px]="item.height" [style.width.px]="item.width" alt="No image" />
-    </ng-masonry-grid-item>
-  </ng-masonry-grid>
+    <h1 class="header">
+        Photography
+        <hr class="hr" />
+      </h1>
+  <div class="imageContainer" *ngFor="let item of masonryItems; let i = index">
+    <img  class="mat-elevation-z2" 
+          src="{{item.url}}" 
+          (click)="test(i)" 
+          alt=""
+          >
+
+  </div>
 </div>
