@@ -1,3 +1,14 @@
+#InstaGradient {
+  --color-stop-1: rgb(64,92,230);
+  --color-stop-2: rgb(131,58,180);
+  --color-stop-3: rgb(193,53,132);
+  --color-stop-4: rgb(225,48,108);
+  --color-stop-5: rgb(245,97,64);
+  --color-stop-6: rgb(247,119,55);
+  --color-stop-7: rgb(252,175,69);
+  --color-stop-8: rgb(255,219,128);
+}
+
 .container {
     width: 90%;
     margin: 3em auto 2em;
@@ -62,6 +73,7 @@
 
 /* Phone Portrait */
 @media only screen and (max-width: 599.99px) and (orientation: portrait) {
+  
   .container{
     max-width: 98%;
     margin: 0.5em auto 1.5em;
@@ -115,7 +127,7 @@
   }
 
   .social .instagram {
-    fill:#f56040;
+    fill: url(#InstaGradient) #f56040;
   }
 
   .social .twitter {
@@ -204,7 +216,6 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    /* flex-direction: column; */
     text-align: center;
   }
   
@@ -256,25 +267,11 @@
     padding: 0;
     display: grid;
     grid-template-columns: .65fr 1fr;
-    grid-template-rows: 80px .8fr .2fr;
-    grid-template-areas:  "header header"
-                          "image contact"
+    grid-template-rows: .8fr .2fr;
+    grid-template-areas:  "image contact"
                           "image socialMedia";
   }  
-  
-  .header{
-    grid-area: header;
-    display: block;
-    margin: 0.2em;
-    font-size: 2.2em;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .header .hr {
-    margin: 10px 0;
-  }
+ 
 
   .image {
     grid-area: image;
@@ -316,7 +313,8 @@
   }
 
   .social .instagram {
-    fill:#f56040;
+    /* fill:#f56040; */
+    fill: url(#InstaGradient) rgb(247,119,55);
   }
 
   .social .twitter {
@@ -328,15 +326,6 @@
     height: 2.5em;
     display: block;
   }
-  
-  .social .instagram a:hover {
-    fill:rgb(247,119,55);
-  }
-  
-  
-  .social .twitter a:hover {
-    fill: rgb(0, 172, 237);
-  }
 
   .social .filter {
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 1));
@@ -347,3 +336,9 @@
 
 }
 
+
+
+
+
+
+ 

@@ -231,7 +231,6 @@
     grid-area: imageMobile;
     max-height: 300px;
     width: 100%;
-    /* margin-top: 2em; */
     margin-left: 1em;    
   }
   
@@ -244,7 +243,6 @@
     grid-area: mainContentMobile;
     height: 100%;
     width: 100%;
-    /* margin-top: 2em; */
     margin-right: 0;
   }
 
@@ -281,26 +279,11 @@
     padding: 0;
     display: grid;
     grid-template-columns: 1fr .65fr;
-    grid-template-rows: 50px 1.25fr .5fr;
-    grid-template-areas:  "headerMobile headerMobile"
-                          "mainContentMobile imageMobile"
+    grid-template-rows: 1.25fr .5fr;
+    grid-template-areas:  "mainContentMobile imageMobile"
                           "externalLinksMobile externalLinksMobile"
   }  
    
-  .header{
-    grid-area: headerMobile;
-    display: block;
-    margin: 0.2em;
-    font-size: 2.2em;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .header .hr {
-    margin: 10px 0;
-  }
-
   .image {
     grid-area: imageMobile;
     max-height: 300px;

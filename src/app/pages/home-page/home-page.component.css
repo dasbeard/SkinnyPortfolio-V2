@@ -102,11 +102,11 @@
   }
 
   .albumContainer h1 {
-    display: block;
+    /* display: block;
     margin: 0.2em;
     font-size: 2.2em;
     width: 100%;
-    text-align: center;
+    text-align: center; */
   }
 
   .albumContainer .hr {

@@ -51,12 +51,38 @@
     top: 7px;
   }
   
-  .mobileHeader {
+  .mobileHeaderTitle {
     margin-left: 15px;
     text-decoration: none;
     color: white;
   }
   
+  .mobileHeader .socialIconsMobile {
+    display: inline;
+    position: relative;
+    top: 3px;
+  }
+
+  .mobileHeader .iconMobile {
+    /* fill: #fff; */
+    margin-left: 1em;
+  }
+  
+  .mobileHeader .iconMobile svg {
+    width: 1em;
+    height: 1em;
+  }
+  
+  .mobileHeader .iconMobile {
+    fill: #fff;
+  }
+ 
+  .mobileHeader .filter {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 1));
+  }
+
+
+  /* -=-=-=-=-=-= Desktop -=-=-=-=-= */
 
 
   .desktopToolbar {
