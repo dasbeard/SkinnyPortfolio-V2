@@ -34,10 +34,17 @@ export class HomePageComponent implements OnInit {
   constructor( private dataService: DataService) {
     this.dataService.getAllAlbums().subscribe(data => {
       this.allAlbums = data;
-      if(this.dataService.initialHome || this.dataService.isHandset) {
-        this.timing = '0.5s'
-      }
+      
+      data.map(album => {
+        if(album.image75 === 'null'){
+          this.dataService.addImage75(album);
+        }
+      })
     })
+
+    if(this.dataService.initialHome || this.dataService.isHandset) {
+      this.timing = '0.5s'
+    }
    }
 
   ngOnInit() {

@@ -79,7 +79,7 @@ export class NewAlbumComponent implements OnInit {
   
   imagePreview(event) {
     // Check file size
-    if(event.target.files[0].size > 150000){
+    if(event.target.files[0].size > 150010){
       alert('Image is too large - Must be under 150kb')
       this.validImage = false;
     } else {

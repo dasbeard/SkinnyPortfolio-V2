@@ -68,7 +68,7 @@
   right: 18px;
   z-index: 10;
   cursor: pointer;
-  animation: spotBounce 1.5s infinite 0s ease-in-out;
+  animation: spotBounce 1.3s infinite 0s ease-in-out;
 }
 
 @keyframes spotBounce{

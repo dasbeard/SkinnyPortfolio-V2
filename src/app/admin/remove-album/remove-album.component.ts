@@ -13,37 +13,9 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 export class RemoveAlbumComponent implements OnInit {
 
   allAlbums: AlbumModel[];
-  // @ViewChild(MatSort) sort: MatSort;
   otherCreditType:boolean = false;
+  templateString:string = "loading albums..."
 
-  
-
-  // albumToEdit: FormGroup;
-
-  // get moreCredits() {
-  //   return this.albumToEdit.get("moreCredits") as FormArray;
-  // }
-
-  // addCredit() {
-  //   if(this.albumToEdit.value.moreCredits.length > 0){
-  //     let last = this.albumToEdit.value.moreCredits[this.albumToEdit.value.moreCredits.length -1].replace(/\s/g,'');
-  //     if (last === ''){
-  //       return
-  //     } else {
-  //       this.moreCredits.push(this.fb.control(""));
-  //     }
-  //   } else {
-  //     this.moreCredits.push(this.fb.control(""));
-  //   }
-  // }
-
-  // removeCredit(index: number): void {
-  //   const arrayControl = <FormArray>this.albumToEdit.controls['moreCredits'];
-  //   arrayControl.removeAt(index);
-  // }
-
-
-  
   constructor(
     private dataService: DataService, 
     private storage: AngularFireStorage,
@@ -51,7 +23,17 @@ export class RemoveAlbumComponent implements OnInit {
     
     this.dataService.getAllAlbums().subscribe(albums => {
       this.allAlbums = albums
-      // console.log(albums);
+      
+      if (this.allAlbums == undefined){
+        this.templateString = "No Albums"
+      } else {
+        albums.map(album => {
+          if(album.image75 === 'null'){
+            this.dataService.addImage75(album);
+          }
+        })        
+      }
+
     })
 
   }

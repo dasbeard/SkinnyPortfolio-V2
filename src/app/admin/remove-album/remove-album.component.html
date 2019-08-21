@@ -14,6 +14,7 @@
               class="albumCover mat-elevation-z1"
               [src]=" album.image75 "  
               alt="{{album.artist}} {{album.album}} Cover Art"
+              loading="lazy"
             >
 
             {{ album.artist }}
@@ -105,7 +106,6 @@
         <br/>
                                         
 
-
       <div class="albumCredits" >
 
         <div class="credit" *ngFor="let credit of album.credits; index as i; trackBy:customTrackBy">
@@ -136,8 +136,6 @@
       </div>
       
       
-      <!-- <br/> -->
-
       <button  
         mat-icon-button 
         class="addCreditBtn" 
@@ -190,13 +188,12 @@
   
     </mat-accordion>
   
-  
   </div>
     
   
   <ng-template #noAlbums>
-    <h3>
-      There are no albums to delete
+    <h3 class="templateTitle">
+      {{templateString}}
     </h3>
   </ng-template>
   

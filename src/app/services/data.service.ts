@@ -34,9 +34,6 @@ export class DataService {
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   
-
-  private basePath: string = "uploads";
-  private uploadTask: firebase.storage.UploadTask;
   newUploadPercent: number;
 
   // For Initial Animation
@@ -44,6 +41,7 @@ export class DataService {
   initialLinks: boolean = false;
   initialContact: boolean = false;
   isHandset: boolean;
+
 
   constructor(
     private afs: AngularFirestore,
@@ -58,24 +56,11 @@ export class DataService {
     );
     this.links = this.linksCollection.valueChanges();
   }
-  
-  deleteAlbum(albumID:string, imageName: string) {
-    // console.log(albumID);
-    // console.log(imageName);
-    
-    this.storage.storage.ref(`Albums/${imageName}`).delete();
-    this.storage.storage.ref(`Albums/thumb@75_${imageName}`).delete();
-    this.storage.storage.ref(`Albums/thumb@200_${imageName}`).delete();
-    this.storage.storage.ref(`Albums/thumb@425_${imageName}`).delete();
 
-    this.singleAlbum = this.afs.doc(`albums/${albumID}`);
-    this.singleAlbum.delete();
-  
-  }
-
+  //  -=-=-=-=-=-=-= Albums -=-=-=-=-=-=-=
   uploadAlbum(data) {
     // console.log(data);
-   
+  
     const file = data.image;
     // const date = data.releaseDate;
     const date = new Date().toISOString();
@@ -85,16 +70,14 @@ export class DataService {
         ? [acc[0].substring(1), val] 
         : [[acc[0], val].join('.')], []);
 
-    // console.log(data.image);
- 
     const fileName = `${data.artist}-${data.album}-${date}.${extension}`;
     const filePath = `Albums/${fileName}`; 
     const task = this.storage.upload(filePath, file);
     
     data.imageName = fileName;
+    data.image75 = 'null';
 
     this.uploadPercent = task.percentageChanges();
-    
     
     task 
     .snapshotChanges()
@@ -106,24 +89,51 @@ export class DataService {
           
         })
       )
-      .subscribe();
-
-    setTimeout(() => {
-      this.addThumb75ToAlbum(data);
-    }, 1500);
-
-      
-  }
-
-
-// -=-=-=-=-=-=-=-=-=-=--=
-
-  async addThumb75ToAlbum( albumData ) {
-    albumData.image75 = await this.getThumb75( albumData );
-    
-    this.updateAlbumWithThumb75(albumData)
+    .subscribe();   
   }
   
+  deleteAlbum(albumID:string, imageName: string) {
+    
+    this.storage.storage.ref(`Albums/${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@75_${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@200_${imageName}`).delete();
+    this.storage.storage.ref(`Albums/thumb@425_${imageName}`).delete();
+
+    this.singleAlbum = this.afs.doc(`albums/${albumID}`);
+    this.singleAlbum.delete();
+  }
+
+  updateAlbum(album) {
+    if ( Object.prototype.toString.call(album.releaseDate) === "[object Date]" ) {
+      album.releaseDate = album.releaseDate.toISOString();
+    }
+
+    this.singleAlbum = this.afs.doc(`albums/${album.id}`);
+    this.singleAlbum.update(album);
+  }
+  
+  getAllAlbums() {
+    this.allAlbums = this.albumCollection.snapshotChanges().pipe(
+      map(action => 
+        action.map(a => {
+          const data = a.payload.doc.data() as AlbumModel;
+          const id = a.payload.doc.id;
+          return {id, ...data}
+        })
+      )
+    )
+    return this.allAlbums;
+  }
+
+
+  // ~~~~~-=-=-=-=-=-= Add Images Functions =-=-=-=-=-=~~~~~
+  async addImage75(album: AlbumModel) {
+    album.image75 = await this.getThumb75(album);
+
+    this.singleAlbum = this.afs.doc(`albums/${album.id}`);
+    this.singleAlbum.update(album);
+  }
+
   async getThumb75(albumData) {
     let i;
     let newURL;
@@ -143,87 +153,19 @@ export class DataService {
     return newURL
   }
   
-  updateAlbumWithThumb75(albumData) {
-    firebase.firestore().collection("albums").where('imageName', '==', albumData.imageName).limit(1).get()
-    .then( data => { 
-      data.docs.forEach(doc => {
-        this.singleAlbum = this.afs.doc(`albums/${doc.id}`);
-        this.singleAlbum.update(albumData);
-        // console.log(doc.id);
-        
-      })
-    })
-  }
-// -=-=-=-=-=-=-=-=-=-=--=
-  
+  // Full-res image as fallback
   async getImage(albumData, fileName) {
     const originalImage = `Albums/${fileName}`;
     albumData.image = await firebase.storage().ref(originalImage).getDownloadURL();
-
-    // console.log(albumData);
-
+   
     return albumData;
   }
-
-  // async getThumbs(fileName) {
-  //   const retries = 10;
-  //   let newURL;
-  //   // let error;
-  //   let i;
-
-  //   for (i = 0; i < retries; ++i) {
-  //     // console.log('-----');
-  //     try {
-  //       newURL = await firebase.storage().ref(fileName).getDownloadURL();
-  //       break;
-  //     } catch(err) {
-  //       // console.log(err);
-  //       // error = err;
-  //     }
-  //   }
-  //     console.log(i);
-  //   // console.log(error);
-  //   return newURL
+  
+  // ~~~~~-=-=-=-=-=-=-=-=-=-=--=~~~~~
   
 
-  // }
+  
 
-  getPlugsImages(fileName:string) {
-    console.log(fileName);
-    
-    const ref75 = this.storage.storage.ref(`brands/thumb@75_${fileName}`);
-    let image75 = ref75.getDownloadURL();
-    const ref200 = this.storage.storage.ref(`brands/thumb@200_${fileName}`);
-    let image200 = ref200.getDownloadURL();
-    const ref425 = this.storage.storage.ref(`brands/thumb@425_${fileName}`);
-    let image425 = ref425.getDownloadURL();
-    
-    const images = {image75:image75, image200: image200, image425: image425}
-    
-    return images;
-  }
-
-  getAllAlbums() {
-    this.allAlbums = this.albumCollection.snapshotChanges().pipe(
-      map(action => 
-        action.map(a => {
-          const data = a.payload.doc.data() as AlbumModel;
-          const id = a.payload.doc.id;
-          return {id, ...data}
-        })
-      )
-    )
-    return this.allAlbums;
-  }
-
-  updateAlbum(album) {
-    if ( Object.prototype.toString.call(album.releaseDate) === "[object Date]" ) {
-      album.releaseDate = album.releaseDate.toISOString();
-    }
-
-    this.singleAlbum = this.afs.doc(`albums/${album.id}`);
-    this.singleAlbum.update(album);
-  }
 
 
   //  -=-=-=-=-=-=-= Links -=-=-=-=-=-=-=
@@ -262,6 +204,26 @@ export class DataService {
     )
     return this.links;
   }
+
+
+  //  -=-=-=-=-=-=-= Plugin Images -=-=-=-=-=-=-=
+  
+  getPlugsImages(fileName:string) {
+    console.log(fileName);
+    
+    const ref75 = this.storage.storage.ref(`brands/thumb@75_${fileName}`);
+    let image75 = ref75.getDownloadURL();
+    const ref200 = this.storage.storage.ref(`brands/thumb@200_${fileName}`);
+    let image200 = ref200.getDownloadURL();
+    const ref425 = this.storage.storage.ref(`brands/thumb@425_${fileName}`);
+    let image425 = ref425.getDownloadURL();
+    
+    const images = {image75:image75, image200: image200, image425: image425}
+    
+    return images;
+  }
+
+
 
 
 }

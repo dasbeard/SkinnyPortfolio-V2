@@ -20,7 +20,7 @@ import { DataService } from 'src/app/services/data.service';
 export class ListLinksComponent implements OnInit, OnDestroy {
 
   allLinks: LinkModel[];
-  timing: string = '.1s';
+  timing: string = '.05s';
   animate: boolean = false;
   
   constructor( private dataService: DataService) {
