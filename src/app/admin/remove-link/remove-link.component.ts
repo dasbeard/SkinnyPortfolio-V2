@@ -23,8 +23,9 @@ export class RemoveLinkComponent {
   }
 
   updateLink(link){
-    console.log(link.date);
-    link.date = link.date.toISOString();
+    if(typeof link.date != 'string') {
+      link.date = link.date.toISOString();
+    }
     this.dataService.updateLink(link);
   }
 
